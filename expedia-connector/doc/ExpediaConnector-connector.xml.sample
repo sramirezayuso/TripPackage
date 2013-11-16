@@ -1,0 +1,20 @@
+<!-- BEGIN_INCLUDE(expediaconnector:my-processor) -->
+    <expediaconnector:my-processor content="#[map-payload:content]" />
+<!-- END_INCLUDE(expediaconnector:my-processor) -->
+
+<!-- BEGIN_INCLUDE(expediaconnector:get-hotel-data) -->
+    <expediaconnector:get-hotel-data apiKey="#[payload.apiKey]" />
+    <expediaconnector:get-hotel-data currencyCode="#[payload.currencyCode]" />
+    <expediaconnector:get-hotel-data countryCode="#[payload.countryCode]" />
+    <expediaconnector:get-hotel-data arrivalDate="#[payload.arrivalDate]" />
+    <expediaconnector:get-hotel-data departureDate="#[payload.departureDate]" />
+    <expediaconnector:get-hotel-data room1="#[payload.room1]" />
+    <expediaconnector:get-hotel-data numberOfResults="#[payload.numberOfResults]" />   
+<!-- END_INCLUDE(expediaconnector:get-hotel-data) -->
+
+
+<!-- BEGIN_INCLUDE(expediaconnector:say-hello) -->
+ 
+    <expediaconnector:say-hello uname="#[payload.uname]" />
+ 
+<!-- END_INCLUDE(expediaconnector:say-hello) -->

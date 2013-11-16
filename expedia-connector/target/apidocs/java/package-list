@@ -1,0 +1,14 @@
+org.expedia
+org.expedia.adapter
+org.expedia.adapters
+org.expedia.agents
+org.expedia.basic
+org.expedia.callback
+org.expedia.config
+org.expedia.connection
+org.expedia.connectivity
+org.expedia.devkit
+org.expedia.oauth
+org.expedia.process
+org.expedia.processors
+

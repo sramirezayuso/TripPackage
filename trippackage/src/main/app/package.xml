@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns:tiket="http://www.mulesoft.org/schema/mule/tiket" xmlns:mulexml="http://www.mulesoft.org/schema/mule/xml" xmlns:mongo="http://www.mulesoft.org/schema/mule/mongo" xmlns:jdbc-ee="http://www.mulesoft.org/schema/mule/ee/jdbc" xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:expediaconnector="http://www.mulesoft.org/schema/mule/expediaconnector" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:apikit="http://www.mulesoft.org/schema/mule/apikit" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/apikit http://www.mulesoft.org/schema/mule/apikit/current/mule-apikit.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/expediaconnector http://www.mulesoft.org/schema/mule/expediaconnector/1.0-SNAPSHOT/mule-expediaconnector.xsd
+http://www.mulesoft.org/schema/mule/ee/jdbc http://www.mulesoft.org/schema/mule/ee/jdbc/current/mule-jdbc-ee.xsd
+http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd
+http://www.mulesoft.org/schema/mule/mongo http://www.mulesoft.org/schema/mule/mongo/2.0/mule-mongo.xsd
+http://www.mulesoft.org/schema/mule/tiket http://www.mulesoft.org/schema/mule/tiket/1.0-SNAPSHOT/mule-tiket.xsd
+http://www.mulesoft.org/schema/mule/xml http://www.mulesoft.org/schema/mule/xml/current/mule-xml.xsd" version="EE-3.4.1">
+    <apikit:config name="apiConfig" raml="package.raml" consoleEnabled="true" consolePath="console" doc:name="Router"/>
+    <apikit:mapping-exception-strategy name="apiKitGlobalExceptionMapping">
+        <apikit:mapping statusCode="404">
+            <apikit:exception value="org.mule.module.apikit.exception.NotFoundException" />
+            <set-property propertyName="Content-Type" value="application/json" />
+            <set-payload value="{ &quot;message&quot;: &quot;Resource not found&quot; }" />
+        </apikit:mapping>
+        <apikit:mapping statusCode="405">
+            <apikit:exception value="org.mule.module.apikit.exception.MethodNotAllowedException" />
+            <set-property propertyName="Content-Type" value="application/json" />
+            <set-payload value="{ &quot;message&quot;: &quot;Method not allowed&quot; }" />
+        </apikit:mapping>
+        <apikit:mapping statusCode="415">
+            <apikit:exception value="org.mule.module.apikit.exception.UnsupportedMediaTypeException" />
+            <set-property propertyName="Content-Type" value="application/json" />
+            <set-payload value="{ &quot;message&quot;: &quot;Unsupported media type&quot; }" />
+        </apikit:mapping>
+        <apikit:mapping statusCode="406">
+            <apikit:exception value="org.mule.module.apikit.exception.NotAcceptableException" />
+            <set-property propertyName="Content-Type" value="application/json" />
+            <set-payload value="{ &quot;message&quot;: &quot;Not acceptable&quot; }" />
+        </apikit:mapping>
+        <apikit:mapping statusCode="400">
+            <apikit:exception value="org.mule.module.apikit.exception.BadRequestException" />
+            <set-property propertyName="Content-Type" value="application/json" />
+            <set-payload value="{ &quot;message&quot;: &quot;Bad request&quot; }" />
+        </apikit:mapping>
+    </apikit:mapping-exception-strategy>
+    <expediaconnector:config name="Expedia" myProperty="Whatevs" doc:name="Expedia">
+        <expediaconnector:connection-pooling-profile initialisationPolicy="INITIALISE_ONE" exhaustedAction="WHEN_EXHAUSTED_GROW"/>
+    </expediaconnector:config>
+    <mongo:config name="Mongo_DB" database="trippackage" doc:name="Mongo DB">
+        <mongo:connection-pooling-profile initialisationPolicy="INITIALISE_ONE" exhaustedAction="WHEN_EXHAUSTED_GROW"/>
+    </mongo:config>
+    <tiket:config name="Tiket" myProperty="whatevs" doc:name="Tiket">
+        <tiket:connection-pooling-profile initialisationPolicy="INITIALISE_ONE" exhaustedAction="WHEN_EXHAUSTED_GROW"/>
+    </tiket:config>
+    <flow name="main" doc:name="main">
+        <http:inbound-endpoint address="http://localhost:8081/trip-package/api" doc:name="HTTP" exchange-pattern="request-response"/>
+        <apikit:router config-ref="apiConfig" doc:name="APIkit Router"/>
+        <exception-strategy ref="apiKitGlobalExceptionMapping" doc:name="Reference Exception Strategy"/>
+    </flow>
+    <flow name="get:/packages:apiConfig" doc:name="get:/packages:apiConfig">
+        <set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
+        <expression-component doc:name="Expression"><![CDATA[app.registry['startYear'] = message.inboundProperties.startDate.substring(0, 4);
+app.registry['startMonth'] = message.inboundProperties.startDate.substring(5, 7);
+app.registry['startDay'] = message.inboundProperties.startDate.substring(8, 10);
+app.registry['returnYear'] = message.inboundProperties.returnDate.substring(0, 4);
+app.registry['returnMonth'] = message.inboundProperties.returnDate.substring(5, 7);
+app.registry['returnDay'] = message.inboundProperties.returnDate.substring(8, 10);]]></expression-component>
+        <expediaconnector:get-hotel-data config-ref="Expedia" apiKey="phr23ratvzk3cmyxwv5a8ft4" arrivalDate="#[app.registry['startMonth'] +&quot;/&quot;+app.registry['startDay']+&quot;/&quot;+app.registry['startYear']]" city="#[message.inboundProperties.destCity.trim()]" countryCode="#[message.inboundProperties.destCountry.trim()]" currencyCode="USD" departureDate="#[app.registry['returnMonth'] +&quot;/&quot;+app.registry['returnDay']+&quot;/&quot;+app.registry['returnYear']]" numberOfResults="3" room1="#[message.inboundProperties.numPers.trim()]" doc:name="Expedia"/>
+        <tiket:get-token config-ref="Tiket" outputtoken="xml" secretkey="7ffa9007da5aeeaaa88e8ad8079b8f33" doc:name="Tiket"/>
+        <logger message="#[payload]" level="INFO" doc:name="Logger"/>
+        <set-variable variableName="hotelData" value="#[payload]" doc:name="Variable"/>
+        <logger message="#[xpath('/tiket/token/text()', flowVars['hotelData']).text]" level="INFO" doc:name="Logger"/>
+        <set-payload value="{&quot;hotels&quot;:[{&quot;hotel&quot;:&quot;#[json:HotelListResponse/HotelList/HotelSummary[0]/name]&quot;, &quot;hotelPrice&quot;:&quot;#[json:HotelListResponse/HotelList/HotelSummary[0]/RoomRateDetailsList/RoomRateDetails/RateInfo/ChargeableRateInfo/@total]&quot;, &quot;hotelId&quot;:&quot;#[json:HotelListResponse/HotelList/HotelSummary[0]/hotelId]&quot;},{&quot;hotel&quot;:&quot;#[json:HotelListResponse/HotelList/HotelSummary[1]/name]&quot;, &quot;hotelPrice&quot;:&quot;#[json:HotelListResponse/HotelList/HotelSummary[1]/RoomRateDetailsList/RoomRateDetails/RateInfo/ChargeableRateInfo/@total]&quot;, &quot;hotelId&quot;:&quot;#[json:HotelListResponse/HotelList/HotelSummary[1]/hotelId]&quot;},{&quot;hotel&quot;:&quot;#[json:HotelListResponse/HotelList/HotelSummary[2]/name]&quot;, &quot;hotelPrice&quot;:&quot;#[json:HotelListResponse/HotelList/HotelSummary[2]/RoomRateDetailsList/RoomRateDetails/RateInfo/ChargeableRateInfo/@total]&quot;, &quot;hotelId&quot;:&quot;#[json:HotelListResponse/HotelList/HotelSummary[2]/hotelId]&quot;}]}" doc:name="Set Payload"/>
+    </flow>
+    <flow name="get:/users/{user}:apiConfig" doc:name="get:/users/{user}:apiConfig">
+        <set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
+        <set-payload value="{username:&quot;#[user]&quot;}" doc:name="Set Payload"/>
+        <mongo:find-one-object config-ref="Mongo_DB" collection="users" failOnNotFound="false" doc:name="Mongo DB"/>
+        <mongo:mongo-collection-to-json doc:name="Mongo DB"/>
+        <set-payload value="{&quot;id&quot;:&quot;#[json:_id/$oid]&quot;,&quot;username&quot;:&quot;#[json:username]&quot;, &quot;city&quot;:&quot;#[json:city]&quot;,&quot;country&quot;:&quot;#[json:country]&quot;}" doc:name="Set Payload"/>
+    </flow>
+    <flow name="get:/users/{user}/packages:apiConfig" doc:name="get:/users/{user}/packages:apiConfig">
+        <set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
+        <set-payload value="{username:&quot;#[user]&quot;}" doc:name="Set Payload"/>
+        <mongo:find-objects config-ref="Mongo_DB" collection="packages"  doc:name="Mongo DB">
+        </mongo:find-objects>
+        <mongo:mongo-collection-to-json doc:name="Mongo DB"/>
+    </flow>
+    <flow name="get:/users/{user}/packages/{package}:apiConfig" doc:name="get:/users/{user}/packages/{package}:apiConfig">
+        <set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
+        <set-payload value="{&#xA;   &quot;startDate&quot; : &quot;2013-10-22&quot;,&#xA;   &quot;returnDate&quot; : &quot;2013-10-29&quot;,&#xA;   &quot;destCountry&quot; : &quot;France&quot;,&#xA;   &quot;destCity&quot; : &quot;Paris&quot;,&#xA;   &quot;departureAirport&quot; : &quot;EZE&quot;,&#xA;   &quot;hotel&quot; : &quot;Hotel Keppler&quot;,&#xA;   &quot;numPers&quot; : 2,&#xA;   &quot;airline&quot; : &quot;Air France&quot;,&#xA;   &quot;hotelPrice&quot; : &quot;2000&quot;,&#xA;   &quot;flightPrice&quot; : &quot;3000&quot;,&#xA;   &quot;totalPrice&quot; : &quot;5000&quot;,&#xA;   &quot;hotelId&quot; : &quot;2250&quot;,&#xA;   &quot;flightId&quot; : &quot;6682&quot;&#xA; }" doc:name="Set Payload"/>
+    </flow>
+    <flow name="post:/users:apiConfig" doc:name="post:/users:apiConfig">
+        <set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
+        <mongo:save-object config-ref="Mongo_DB" collection="packages" doc:name="Mongo DB"/>
+    </flow>
+    <flow name="post:/users/{user}/packages:apiConfig" doc:name="post:/users/{user}/packages:apiConfig">
+        <set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
+        <set-payload value="{&quot;startDate&quot;:&quot;#[json:startDate]&quot;, &quot;returnDate&quot;:&quot;#[json:returnDate]&quot;, &quot;destCountry&quot;:&quot;#[json:destCountry]&quot;, &quot;destCity&quot;:&quot;#[json:destCity]&quot;, &quot;departureAirport&quot;:&quot;#[json:departureAirport]&quot;,  &quot;hotelId&quot;:&quot;#[json:hotelId]&quot;, &quot;flightId&quot;:&quot;#[json:flightId]&quot;, &quot;user&quot;:&quot;#[user]&quot; }" doc:name="Set Payload"/>
+        <mongo:save-object config-ref="Mongo_DB" collection="packages" doc:name="Mongo DB"/>
+    </flow>
+</mule>

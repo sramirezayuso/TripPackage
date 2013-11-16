@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<namespace xmlns="http://www.mulesoft.org/schema/mule/tooling.attributes" xmlns:mule="http://www.mulesoft.org/schema/mule/core" prefix="expediaconnector" url="http://www.mulesoft.org/schema/mule/expediaconnector">
+  <global-cloud-connector connectivityTesting="on" extends="http://www.mulesoft.org/schema/mule/expediaconnector/abstractExpediaconnectorConnectorGeneric" abstract="true" image="" localId="parentConfig" icon="" description="" caption="Expedia"></global-cloud-connector>
+  <nested abstract="true" localId="connection-pooling-profile" description="" caption="">
+    <label description="" caption="Define connection pool configuration" name="poolingProfileLabel"></label>
+    <integer step="0" min="0" defaultValue="5" fillLine="true" description="Controls the maximum number of connections that can be borrowed from the pool at one time. When set to a negative value, there is no limit to the number of connections that may be active at one time. When maxActive is exceeded, the pool is said to be exhausted." caption="Max active" name="maxActive"></integer>
+    <integer step="0" min="0" defaultValue="5" fillLine="true" description="Controls the maximum number of connections that can sit idle in the pool at any time. When set to a negative value, there is no limit to the number of connections that may be idle at one time." caption="Max idle" name="maxIdle"></integer>
+    <enum defaultValue="INITIALISE_ONE" alwaysFill="true" description="Determines how connections in a pool should be initialized. The possible values are: INITIALISE_NONE (will not load any connection into the pool on startup), INITIALISE_ONE (will load one initial connection into the pool on startup), or INITIALISE_ALL (will load all connections in the pool on startup)" caption="Initialisation policy" name="initialisationPolicy">
+      <option value="INITIALISE_NONE"></option>
+      <option value="INITIALISE_ONE"></option>
+      <option value="INITIALISE_ALL"></option>
+    </enum>
+    <enum defaultValue="WHEN_EXHAUSTED_GROW" alwaysFill="true" description="Specifies the behavior of the connection pool when the pool is exhausted. Possible values are: &quot;WHEN_EXHAUSTED_FAIL&quot;, which will throw a NoSuchElementException, &quot;WHEN_EXHAUSTED_WAIT&quot;, which will block by invoking Object.wait(long) until a new or idle object is available, or WHEN_EXHAUSTED_GROW, which will create a new connection and return it, essentially making maxActive meaningless. If a positive maxWait value is supplied, it will block for at most that many milliseconds, after which a NoSuchElementException will be thrown. If maxThreadWait is a negative value, it will block indefinitely." caption="Exhausted action" name="exhaustedAction">
+      <option value="WHEN_EXHAUSTED_WAIT"></option>
+      <option value="WHEN_EXHAUSTED_FAIL"></option>
+      <option value="WHEN_EXHAUSTED_GROW"></option>
+    </enum>
+    <integer step="0" min="0" defaultValue="5" fillLine="true" description="When exhausted action is Wait (or block) this is the amount of time in milliseconds that the pool will wait before failing. Setting a negative value will block indefinitely until an idle instance becomes available." caption="Max wait" name="maxWait"></integer>
+  </nested>
+  <nested abstract="true" localId="reconnectionStrategyElement" description="" caption="">
+    <label description="" caption="Define how mule should attempt to handle a connection failure" name="connectionLabel"></label>
+    <radioBoolean fillLine="true" description="Disable reconection strategy" caption="Do not use a Reconnection strategy" name="noReconnection"></radioBoolean>
+    <radioBoolean fillLine="true" description="A reconnection strategy that allows the user to configure how many times a reconnection should be attempted and how long to wait between attempts." caption="Standard Reconnection" name="standardReconnection"></radioBoolean>
+    <integer step="1" max="2147483647" min="1" defaultValue="2000" indented="true" controlled="standardReconnection" description="How often (in ms) to reconnect" caption="Frequency (ms)" name="reconnectionFrequency"></integer>
+    <integer step="1" max="2147483647" min="1" defaultValue="2" indented="true" controlled="standardReconnection,!reconnectForever" description="How many reconnection attempts to make" caption="Reconnection Attempts" name="reconnectionAttemps"></integer>
+    <boolean indented="true" controlled="standardReconnection" description="A reconnection strategy that retries an infinite number of times at the specified frequency." caption="Reconnect Forever" name="reconnectForever"></boolean>
+    <radioBoolean fillLine="true" description="A user-defined reconnection strategy." caption="Custom Reconnection" name="customReconnection"></radioBoolean>
+    <classname indented="true" controlled="customReconnection" description="A class that implements the RetryPolicyTemplate interface." caption="Class" name="class"></classname>
+    <childElement allowMultiple="true" controlled="customReconnection" description="Property elements." caption="Properties" name="http://www.springframework.org/schema/beans/property"></childElement>
+  </nested>
+  <global-cloud-connector connectivityTesting="on" extends="http://www.mulesoft.org/schema/mule/expediaconnector/parentConfig" abstract="false" image="icons/large/expediaconnector-connector-48x32.png" localId="config" icon="icons/small/expediaconnector-connector-24x16.png" description="Global Expedia configuration information." caption="Expedia">
+    <attribute-category description="Expediaconnector configuration properties." caption="General">
+      <group caption="Generic" id="expediaconnectorGenericProperties">
+        <name required="true" description="Give a name to this configuration so it can be later referenced by config-ref." caption="Name" name="name"></name>
+      </group>
+      <group caption="Connection" id="connection">
+        <string javaType="java.lang.String" required="false" description="A username." caption="Username" name="username"></string>
+        <string javaType="java.lang.String" required="false" description="A password." caption="Password" name="password"></string>
+      </group>
+      <group caption="General" id="general">
+        <string javaType="java.lang.String" required="true" description="Configurable." caption="My Property" name="myProperty"></string>
+      </group>
+    </attribute-category>
+    <attribute-category description="Pooling profile options." caption="Pooling Profile">
+      <group caption="Pooling Profile" id="poolingProfile">
+        <childElement inplace="true" description="" caption="" name="http://www.mulesoft.org/schema/mule/expediaconnector/connection-pooling-profile"></childElement>
+      </group>
+    </attribute-category>
+    <attribute-category description="Reconnection options." caption="Reconnection">
+      <group caption="Strategies" id="reconnectionStrategies">
+        <childElement inplace="true" valuePersistence="org.mule.tooling.ui.modules.core.widgets.meta.HTTPTransactionValuePersistence" description="" caption="" name="http://www.mulesoft.org/schema/mule/core/reconnectionStrategyElement"></childElement>
+        <childElement allowedSubTypes="http://www.mulesoft.org/schema/mule/core/reconnect,http://www.mulesoft.org/schema/mule/core/reconnect-custom-strategy,http://www.mulesoft.org/schema/mule/core/reconnect-forever" allowSubTypes="true" visibleInDialog="false" description="" caption="" name="http://www.mulesoft.org/schema/mule/core/abstractReconnectionStrategy"></childElement>
+      </group>
+    </attribute-category>
+  </global-cloud-connector>
+  <cloud-connector abstract="true" image="icons/large/expediaconnector-connector-48x32.png" localId="abstractExpediaconnectorConnectorGeneric" icon="icons/small/expediaconnector-connector-24x16.png" description="Interact with Expediaconnector." caption="Abstractexpediaconnectorconnectorgeneric">
+    <attribute-category description="General." caption="General">
+      <group caption="Generic" id="abstractExpediaconnectorConnectorGeneric">
+        <globalRef requiredType="http://www.mulesoft.org/schema/mule/expediaconnector/config" required="true" description="Specify which configuration to use for this invocation." caption="Config Reference" name="config-ref"></globalRef>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+  <cloud-connector extends="http://www.mulesoft.org/schema/mule/expediaconnector/abstractExpediaconnectorConnectorGeneric" image="icons/large/expediaconnector-connector-48x32.png" localId="expediaconnector-connector" icon="icons/small/expediaconnector-connector-24x16.png" description="Cloud Connector." caption="Expedia" aliasId="org.mule.tooling.ui.modules.core.pattern.expediaconnector">
+    <attribute-category description="General." caption="General">
+      <group caption="Generic" id="expediaconnectorConnectorGeneric">
+        <modeSwitch alwaysCombo="true" description="Operation." caption="Operation" name="Expediaconnector operations to execute">
+          <mode modeLabel="Get hotel data" modeId="http://www.mulesoft.org/schema/mule/expediaconnector/get-hotel-data"></mode>
+          <mode modeLabel="My processor" modeId="http://www.mulesoft.org/schema/mule/expediaconnector/my-processor"></mode>
+          <mode modeLabel="Say hello" modeId="http://www.mulesoft.org/schema/mule/expediaconnector/say-hello"></mode>
+        </modeSwitch>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+  <cloud-connector returnType="java.lang.String" extends="http://www.mulesoft.org/schema/mule/expediaconnector/abstractExpediaconnectorConnectorGeneric" abstract="true" image="icons/large/expediaconnector-connector-48x32.png" localId="get-hotel-data" icon="icons/small/expediaconnector-connector-24x16.png" description="" caption="Get Hotel Data">
+    <attribute-category description="General." caption="General">
+      <group caption="General" id="general">
+        <string javaType="java.lang.String" required="true" description="Key to use api." caption="Api Key" name="apiKey"></string>
+        <string javaType="java.lang.String" required="true" description="Date of arrival." caption="Arrival Date" name="arrivalDate"></string>
+        <string javaType="java.lang.String" required="true" description="A city." caption="City" name="city"></string>
+        <string javaType="java.lang.String" required="true" description="ISO country code." caption="Country Code" name="countryCode"></string>
+        <string javaType="java.lang.String" required="true" description="Currency." caption="Currency Code" name="currencyCode"></string>
+        <string javaType="java.lang.String" required="true" description="Date of departure." caption="Departure Date" name="departureDate"></string>
+        <string javaType="java.lang.String" required="true" description="Number of results to return." caption="Number Of Results" name="numberOfResults"></string>
+        <string javaType="java.lang.String" required="true" description="Number of guests." caption="Room1" name="room1"></string>
+      </group>
+    </attribute-category>
+    <attribute-category description="Connection." caption="Connection">
+      <group caption="Connection" id="connection">
+        <label description="" caption="Use these fields to override the credentials defined in the Expedia connector." name=""></label>
+        <label description="" caption="" name=""></label>
+        <string javaType="java.lang.String" required="false" description="A username." caption="Username" name="username"></string>
+        <string javaType="java.lang.String" required="false" description="A password." caption="Password" name="password"></string>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+  <cloud-connector returnType="java.lang.String" extends="http://www.mulesoft.org/schema/mule/expediaconnector/abstractExpediaconnectorConnectorGeneric" abstract="true" image="icons/large/expediaconnector-connector-48x32.png" localId="my-processor" icon="icons/small/expediaconnector-connector-24x16.png" description="" caption="My Processor">
+    <attribute-category description="General." caption="General">
+      <group caption="General" id="general">
+        <string javaType="java.lang.String" required="true" description="Content to be processed." caption="Content" name="content"></string>
+      </group>
+    </attribute-category>
+    <attribute-category description="Connection." caption="Connection">
+      <group caption="Connection" id="connection">
+        <label description="" caption="Use these fields to override the credentials defined in the Expedia connector." name=""></label>
+        <label description="" caption="" name=""></label>
+        <string javaType="java.lang.String" required="false" description="A username." caption="Username" name="username"></string>
+        <string javaType="java.lang.String" required="false" description="A password." caption="Password" name="password"></string>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+  <cloud-connector returnType="java.lang.String" extends="http://www.mulesoft.org/schema/mule/expediaconnector/abstractExpediaconnectorConnectorGeneric" abstract="true" image="icons/large/expediaconnector-connector-48x32.png" localId="say-hello" icon="icons/small/expediaconnector-connector-24x16.png" description="" caption="Say Hello">
+    <attribute-category description="General." caption="General">
+      <group caption="General" id="general">
+        <string javaType="java.lang.String" required="true" description="Name to be processed." caption="Uname" name="uname"></string>
+      </group>
+    </attribute-category>
+    <attribute-category description="Connection." caption="Connection">
+      <group caption="Connection" id="connection">
+        <label description="" caption="Use these fields to override the credentials defined in the Expedia connector." name=""></label>
+        <label description="" caption="" name=""></label>
+        <string javaType="java.lang.String" required="false" description="A username." caption="Username" name="username"></string>
+        <string javaType="java.lang.String" required="false" description="A password." caption="Password" name="password"></string>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+</namespace>

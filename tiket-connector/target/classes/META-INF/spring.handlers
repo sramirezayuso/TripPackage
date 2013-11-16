@@ -1,0 +1,1 @@
+http\://www.mulesoft.org/schema/mule/tiket=org.tiket.config.TiketNamespaceHandler

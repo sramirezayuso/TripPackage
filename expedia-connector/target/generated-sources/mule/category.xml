@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><site><feature id="org.mule.tooling.ui.extension.expedia-connector"><category name="org.expedia"/></feature><category-def label="Mule Cloud Connectors" name="org.expedia"/></site>

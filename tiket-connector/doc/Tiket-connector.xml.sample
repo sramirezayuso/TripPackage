@@ -1,0 +1,12 @@
+<!-- BEGIN_INCLUDE(tiket:search-flights) -->
+    <tiket:search-flights token="#[map-payload.token]" d="#[map-payload.d]" a="#[map-payload.a]" date="#[map-payload.date]" adults="#[map-payload.adults]" outputsf="#[map-payload.outputsf]"/>
+<!-- END_INCLUDE(tiket:search-flights) -->
+<!-- BEGIN_INCLUDE(tiket:get-flight-data) -->
+    <tiket:get-flight-data token="#[map-payload.token]" outputgfd="#[map-payload.outputgfd]" date="#[map-payload.date]" flight_id="#[map-payload.flight_id]"/>
+<!-- END_INCLUDE(tiket:get-flight-data) -->
+<!-- BEGIN_INCLUDE(tiket:get-token) -->
+    <tiket:get-token secretkey="#[map-payload.secretkey]" outputtoken="#[map-payload.outputtoken]" />
+<!-- END_INCLUDE(tiket:get-token) -->
+<!-- BEGIN_INCLUDE(tiket:my-processor) -->
+    <tiket:my-processor content="#[map-payload:content]" />
+<!-- END_INCLUDE(tiket:my-processor) -->
