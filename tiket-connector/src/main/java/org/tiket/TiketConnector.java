@@ -113,7 +113,7 @@ public abstract class TiketConnector {
      *     token to use api
      * @param date
      *     date of departure
-     * @param adults
+     * @param adult
      *     number of passengers
      * @param d
      *     ISO code for departure airport
@@ -132,7 +132,7 @@ public abstract class TiketConnector {
         @RestQueryParam("d") String d,
         @RestQueryParam("a") String a,
         @RestQueryParam("date") String date,
-        @RestQueryParam("adults") String adults,
+        @RestQueryParam("adult") String adult,
         @RestQueryParam("output") String outputsf)
         throws IOException;
     

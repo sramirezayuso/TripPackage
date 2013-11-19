@@ -1,5 +1,5 @@
 <!-- BEGIN_INCLUDE(tiket:search-flights) -->
-    <tiket:search-flights token="#[map-payload.token]" d="#[map-payload.d]" a="#[map-payload.a]" date="#[map-payload.date]" adults="#[map-payload.adults]" outputsf="#[map-payload.outputsf]"/>
+    <tiket:search-flights token="#[map-payload.token]" d="#[map-payload.d]" a="#[map-payload.a]" date="#[map-payload.date]" adult="#[map-payload.adult]" outputsf="#[map-payload.outputsf]"/>
 <!-- END_INCLUDE(tiket:search-flights) -->
 <!-- BEGIN_INCLUDE(tiket:get-flight-data) -->
     <tiket:get-flight-data token="#[map-payload.token]" outputgfd="#[map-payload.outputgfd]" date="#[map-payload.date]" flight_id="#[map-payload.flight_id]"/>

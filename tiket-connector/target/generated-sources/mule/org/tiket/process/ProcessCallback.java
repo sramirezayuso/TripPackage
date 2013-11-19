@@ -9,7 +9,7 @@ import javax.annotation.Generated;
  *  @param <T> type of the return value of the processing execution
  * 
  */
-@Generated(value = "Mule DevKit Version 3.4.0", date = "2013-11-16T03:08:13-03:00", comments = "Build 3.4.0.1555.8df15c1")
+@Generated(value = "Mule DevKit Version 3.4.0", date = "2013-11-19T04:05:26-03:00", comments = "Build 3.4.0.1555.8df15c1")
 public interface ProcessCallback<T,O >{
 
     T process(O object) throws Exception;

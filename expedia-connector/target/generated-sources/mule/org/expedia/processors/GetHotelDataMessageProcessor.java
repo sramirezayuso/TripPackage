@@ -23,10 +23,10 @@ import org.mule.config.i18n.CoreMessages;
 
 
 /**
- * GetHotelDataMessageProcessor invokes the {@link org.expedia.ExpediaConnectorConnector#getHotelData(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)} method in {@link ExpediaConnectorConnector }. For each argument there is a field in this processor to match it.  Before invoking the actual method the processor will evaluate and transform where possible to the expected argument type.
+ * GetHotelDataMessageProcessor invokes the {@link org.expedia.ExpediaConnectorConnector#getHotelData(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)} method in {@link ExpediaConnectorConnector }. For each argument there is a field in this processor to match it.  Before invoking the actual method the processor will evaluate and transform where possible to the expected argument type.
  * 
  */
-@Generated(value = "Mule DevKit Version 3.4.0", date = "2013-11-13T05:00:27-03:00", comments = "Build 3.4.0.1555.8df15c1")
+@Generated(value = "Mule DevKit Version 3.4.0", date = "2013-11-19T04:02:39-03:00", comments = "Build 3.4.0.1555.8df15c1")
 public class GetHotelDataMessageProcessor
     extends AbstractMessageProcessor<Object>
     implements Disposable, Initialisable, Startable, Stoppable, MessageProcessor
@@ -48,6 +48,8 @@ public class GetHotelDataMessageProcessor
     protected String _room1Type;
     protected Object numberOfResults;
     protected String _numberOfResultsType;
+    protected Object _type;
+    protected String __typeType;
 
     /**
      * Obtains the expression manager from the Mule context and initialises the connector. If a target object  has not been set already it will search the Mule registry for a default one.
@@ -88,6 +90,15 @@ public class GetHotelDataMessageProcessor
      */
     public void setFlowConstruct(FlowConstruct flowConstruct) {
         super.setFlowConstruct(flowConstruct);
+    }
+
+    /**
+     * Sets _type
+     * 
+     * @param value Value to set
+     */
+    public void set_type(Object value) {
+        this._type = value;
     }
 
     /**
@@ -182,6 +193,7 @@ public class GetHotelDataMessageProcessor
             final String _transformedDepartureDate = ((String) evaluateAndTransform(getMuleContext(), event, GetHotelDataMessageProcessor.class.getDeclaredField("_departureDateType").getGenericType(), null, departureDate));
             final String _transformedRoom1 = ((String) evaluateAndTransform(getMuleContext(), event, GetHotelDataMessageProcessor.class.getDeclaredField("_room1Type").getGenericType(), null, room1));
             final String _transformedNumberOfResults = ((String) evaluateAndTransform(getMuleContext(), event, GetHotelDataMessageProcessor.class.getDeclaredField("_numberOfResultsType").getGenericType(), null, numberOfResults));
+            final String _transformed_type = ((String) evaluateAndTransform(getMuleContext(), event, GetHotelDataMessageProcessor.class.getDeclaredField("__typeType").getGenericType(), null, _type));
             Object resultPayload;
             ProcessTemplate<Object, Object> processTemplate = ((ProcessAdapter<Object> ) moduleObject).getProcessTemplate();
             resultPayload = processTemplate.execute(new ProcessCallback<Object,Object>() {
@@ -198,7 +210,7 @@ public class GetHotelDataMessageProcessor
                 public Object process(Object object)
                     throws Exception
                 {
-                    return ((ExpediaConnectorConnector) object).getHotelData(_transformedApiKey, _transformedCurrencyCode, _transformedCountryCode, _transformedCity, _transformedArrivalDate, _transformedDepartureDate, _transformedRoom1, _transformedNumberOfResults);
+                    return ((ExpediaConnectorConnector) object).getHotelData(_transformedApiKey, _transformedCurrencyCode, _transformedCountryCode, _transformedCity, _transformedArrivalDate, _transformedDepartureDate, _transformedRoom1, _transformedNumberOfResults, _transformed_type);
                 }
 
             }

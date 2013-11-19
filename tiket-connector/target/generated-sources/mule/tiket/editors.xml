@@ -126,7 +126,7 @@
     <attribute-category description="General." caption="General">
       <group caption="General" id="general">
         <string javaType="java.lang.String" required="true" description="ISO code for destination airport." caption="A" name="a"></string>
-        <string javaType="java.lang.String" required="true" description="Number of passengers." caption="Adults" name="adults"></string>
+        <string javaType="java.lang.String" required="true" description="Number of passengers." caption="Adult" name="adult"></string>
         <string javaType="java.lang.String" required="true" description="ISO code for departure airport." caption="D" name="d"></string>
         <string javaType="java.lang.String" required="true" description="Date of departure." caption="Date" name="date"></string>
         <string javaType="java.lang.String" required="true" description="Output format." caption="Outputsf" name="outputsf"></string>

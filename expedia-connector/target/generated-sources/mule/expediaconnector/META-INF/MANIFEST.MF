@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Expedia
 Bundle-SymbolicName: org.mule.tooling.ui.contribution.expediaconnector;singleton:=true
-Bundle-Version: 1.0.0.201311130500
+Bundle-Version: 1.0.0.201311191602
 Bundle-Activator: org.mule.tooling.ui.contribution.ExpediaconnectorActivator
 Bundle-Vendor: MuleSoft, Inc.
 Require-Bundle: org.eclipse.ui,

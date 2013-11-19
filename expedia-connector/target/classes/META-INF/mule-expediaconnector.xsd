@@ -131,6 +131,11 @@
             <xs:documentation>number of results to return</xs:documentation>
           </xs:annotation>
         </xs:attribute>
+        <xs:attribute name="_type" use="required" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>output format</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
         <xs:attribute name="username" use="optional" type="xs:string">
           <xs:annotation>
             <xs:documentation>A username</xs:documentation>

@@ -26,7 +26,7 @@ import org.tiket.process.ProcessTemplate;
  * GetTokenMessageProcessor invokes the {@link org.tiket.TiketConnector#getToken(java.lang.String, java.lang.String)} method in {@link TiketConnector }. For each argument there is a field in this processor to match it.  Before invoking the actual method the processor will evaluate and transform where possible to the expected argument type.
  * 
  */
-@Generated(value = "Mule DevKit Version 3.4.0", date = "2013-11-16T03:08:13-03:00", comments = "Build 3.4.0.1555.8df15c1")
+@Generated(value = "Mule DevKit Version 3.4.0", date = "2013-11-19T04:05:26-03:00", comments = "Build 3.4.0.1555.8df15c1")
 public class GetTokenMessageProcessor
     extends AbstractMessageProcessor<Object>
     implements Disposable, Initialisable, Startable, Stoppable, MessageProcessor

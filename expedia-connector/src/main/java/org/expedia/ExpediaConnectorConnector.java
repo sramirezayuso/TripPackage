@@ -126,7 +126,9 @@ public abstract class ExpediaConnectorConnector
      * @param numberOfResults
      *     number of results to return
      * @param city
-     *     a city 
+     *     a city
+     * @param _type
+     *     output format
      * @return Some string
      * @throws IOException
      *      when the call fails
@@ -141,21 +143,57 @@ public abstract class ExpediaConnectorConnector
         @RestQueryParam("arrivalDate") String arrivalDate,
         @RestQueryParam("departureDate") String departureDate,
         @RestQueryParam("room1") String room1,
-        @RestQueryParam("numberOfResults") String numberOfResults)
+        @RestQueryParam("numberOfResults") String numberOfResults,
+        @RestQueryParam("_type") String _type)
         throws IOException;
 
-/** 
-* Custom processor 
-* 
-* {@sample.xml ../../../doc/ExpediaConnector-connector.xml.sample expediaconnector:say-hello} 
-* 
-* @param uname Name to be processed 
-* @return Some string 
-*/
-@Processor
-public String sayHello(String uname) 
-{ 
-    return "Hello " + uname; 
-}
+    /**
+     * Custom processor
+     *
+     * {@sample.xml ../../../doc/ExpediaConnector-connector.xml.sample expediaconnector:my-processor}
+     * 
+     * @param apiKey
+     *     key to use api
+     * @param currencyCode
+     *     currency
+     * @param arrivalDate
+     *     date of arrival
+     * @param departureDate
+     *     date of departure
+     * @param room1
+     *     number of guests
+     * @param _type
+     *     output format
+     * @param hotelIdList
+     *     selected hotels
+     * @return Some string
+     * @throws IOException
+     *      when the call fails
+     */
+    @Processor
+    @RestCall(uri = "http://api.ean.com/ean-services/rs/hotel/v3/list?", method = HttpMethod.GET)
+    public abstract String getHotelData(
+        @RestQueryParam("apiKey") String apiKey,
+        @RestQueryParam("currencyCode") String currencyCode,
+        @RestQueryParam("arrivalDate") String arrivalDate,
+        @RestQueryParam("departureDate") String departureDate,
+        @RestQueryParam("room1") String room1,
+        @RestQueryParam("hotelIdList") String hotelIdList,
+        @RestQueryParam("_type") String _type)
+        throws IOException;
+    
+	/** 
+	* Custom processor 
+	* 
+	* {@sample.xml ../../../doc/ExpediaConnector-connector.xml.sample expediaconnector:say-hello} 
+	* 
+	* @param uname Name to be processed 
+	* @return Some string 
+	*/
+	@Processor
+	public String sayHello(String uname) 
+	{ 
+	    return "Hello " + uname; 
+	}
 
 }

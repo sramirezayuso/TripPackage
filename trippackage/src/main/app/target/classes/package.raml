@@ -1,0 +1,421 @@
+#%RAML 0.8
+---
+title: Trip Package API
+version: v1.0
+baseUri: http://trip-package/api
+mediaType: application/json
+schemas:
+  - post-user: |
+      {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "type" : "object",
+        "properties" : {
+          "city" : {
+            "type" : "string"
+          },
+          "country" : {
+            "type" : "string"
+          },
+          "password" : {
+            "type" : "string"
+          },
+          "passwordVerif" : {
+            "type" : "string"
+          },
+          "username" : {
+            "type" : "string"
+          }
+        }
+      }
+  - get-user: |
+      {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "type" : "object",
+        "properties" : {
+          "city" : {
+            "type" : "string"
+          },
+          "country" : {
+            "type" : "string"
+          },
+          "id" : {
+            "type" : "string"
+          },
+          "username" : {
+            "type" : "string"
+          }
+        }
+      }
+  - get-users: |
+      {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "type" : "object",
+        "properties" : {
+          "city" : {
+            "type" : "string"
+          },
+          "country" : {
+            "type" : "string"
+          },
+          "id" : {
+            "type" : "string"
+          },
+          "username" : {
+            "type" : "string"
+          }
+        }
+      }
+  - post-package: |
+      {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "type" : "object",
+        "properties" : {
+          "startDate" : {
+            "type" : "string"
+          },
+          "returnDate" : {
+            "type" : "string"
+          },
+          "destCountry" : {
+            "type" : "string"
+          },
+          "destCity" : {
+            "type" : "string"
+          },
+          "departureAirport" : {
+            "type" : "string"
+          },
+          "hotelId" : {
+            "type" : "string"
+          },
+          "flightId" : {
+            "type" : "string"
+          }
+        }
+      }
+  - get-package: |
+      {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "type" : "object",
+        "properties" : {
+          "startDate" : {
+            "type" : "string"
+          },
+          "returnDate" : {
+            "type" : "string"
+          },
+          "destCountry" : {
+            "type" : "string"
+          },
+          "destCity" : {
+            "type" : "string"
+          },
+          "departureAirport" : {
+            "type" : "string"
+          },
+          "hotelId" : {
+            "type" : "string"
+          },
+          "flightId" : {
+            "type" : "string"
+          },
+          "hotel" : {
+            "type" : "string"
+          },
+          "numPers" : {
+            "type" : "string"
+          },
+          "airline" : {
+            "type" : "string"
+          },
+          "hotelPrice" : {
+            "type" : "string"
+          },
+          "flightPrice" : {
+            "type" : "string"
+          },
+          "totalPrice" : {
+            "type" : "string"
+          }
+        }
+      }
+  - get-packages: |
+      {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+         "type" : "object",
+         "properties" : {
+            "packages" : {
+              "type" : "array",
+              "items" : {
+                "type" : "object",
+                "properties" : {
+                  "packageId" : {
+                    "type" : "string"
+                  },
+                  "startDate" : {
+                    "type" : "string"
+                  },
+                  "returnDate" : {
+                    "type" : "string"
+                  },
+                  "destCountry" : {
+                    "type" : "string"
+                  },
+                  "destCity" : {
+                    "type" : "string"
+                  },
+                  "departureAirport" : {
+                    "type" : "string"
+                  },
+                  "hotelId" : {
+                    "type" : "string"
+                  },
+                  "flightId" : {
+                    "type" : "string"
+                  },
+                  "hotel" : {
+                    "type" : "string"
+                  },
+                  "numPers" : {
+                    "type" : "string"
+                  },
+                  "airline" : {
+                    "type" : "string"
+                  },
+                  "hotelPrice" : {
+                    "type" : "string"
+                  },
+                  "flightPrice" : {
+                    "type" : "string"
+                  },
+                  "totalPrice" : {
+                    "type" : "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+documentation:
+  - title: Introduction
+    content: |
+      API to manage booking of travel packages.
+resourceTypes: 
+  - base:
+      get?:
+        responses:
+          201:
+            body:
+              schema: get-<<resourcePathName>>
+  - collection:
+      type: base
+      post:
+        body:
+          schema: post-<<resourcePathName | !singularize>>
+        responses:
+          201:
+            description: Created!
+            headers:
+              Location:
+                description: uri of new resource
+                type: string
+                required: true  
+traits:
+  - filterable:
+      queryParameters:
+        destCountry:
+          displayName: Destination Country
+          description: ISO country code.
+          type: string
+          required: true
+          example: country=FR
+        destCity:
+          displayName: Destination City
+          description: Destination city for the trip.
+          type: string
+          required: true
+          example: city=Paris
+        departureAirport:
+          displayName: Departure Airport
+          description: IATA airport code.
+          type: string
+          required: true
+          example: departureAirport=EZE
+        startDate:
+          displayName: Start Date.
+          description: Date of deaprture.
+          type: string
+          required: true
+          example: startDate=2013-11-01 
+        returnDate:
+          displayName: Return Date
+          description: Date of return.
+          type: string
+          required: true
+          example: returnDate=2013-11-01
+        numPers:
+          displayName: Person Number
+          description: Number of persons.
+          type: string
+          required: true
+          example: numPers=2
+/users:
+  type: collection
+  post:
+    body:
+      example: |
+        {
+          "username" : "sramirezayuso",
+          "password" : "holahola",
+          "passwordVerif" : "holahola",
+          "country" : "Argentina",
+          "city" : "Buenos Aires"
+        }
+    responses:
+      201:
+        body:
+          schema: | 
+            {
+              "$schema": "http://json-schema.org/draft-04/schema#",
+              "type" : "object",
+              "properties" : {
+                "packageId" : "string"
+              }
+            }
+          example: | 
+            {
+              "packageId" : "1"
+            }
+  /{user}:
+    type: base
+    get:
+      responses:
+        201:
+          body:
+            example: |
+              {
+                  "id" : "10",
+                  "username" : "sramirezayuso",
+                  "country" : "Argentina",
+                  "city" : "Buenos Aires"
+              }
+    /packages:
+      type: collection
+      get:
+        responses:
+          201:
+            body:
+              example: |
+                {
+                  "packages" :  [
+                    {
+                      "packageId" : "71923",
+                      "startDate" : "2013-10-22",
+                      "returnDate" : "2013-10-29",
+                      "destCountry" : "FR",
+                      "destCity" : "Paris",
+                      "departureAirport" : "EZE",
+                      "hotel" : "Hotel Keppler",
+                      "numPers" : 2,
+                      "airline" : "Air France",
+                      "hotelPrice" : "2000",
+                      "flightPrice" : "3000",
+                      "totalPrice" : "5000",
+                      "hotelId" : "2250",
+                      "flightId" : "6682"
+                    },
+                    {
+                      "packageId" : "719265",
+                      "startDate" : "2013-07-22",
+                      "returnDate" : "2013-08-29",
+                      "destCountry" : "DE",
+                      "destCity" : "Frankfurt",
+                      "departureAirport" : "EZE",
+                      "hotel" : "Adler Hotel",
+                      "numPers" : 1,
+                      "airline" : "Lufthansa",
+                      "hotelPrice" : "2500",
+                      "flightPrice" : "3000",
+                      "totalPrice" : "5500",
+                      "hotelId" : "2250",
+                      "flightId" : "6682"
+                    }
+                  ]
+                }
+      post:
+        body:
+          example: |
+            {
+                "startDate" : "2013-10-22",
+                "returnDate" : "2013-10-29",
+                "destCountry" : "FR",
+                "destCity" : "Paris",
+                "departureAirport" : "EZE",
+                "hotelId" : "2250",
+                "flightId" : "6682"
+            }
+      /{package}:
+        type: base
+        get:
+          responses:
+            201:
+              body:
+                example: |
+                   {
+                      "startDate" : "2013-10-22",
+                      "returnDate" : "2013-10-29",
+                      "destCountry" : "France",
+                      "destCity" : "Paris",
+                      "departureAirport" : "EZE",
+                      "hotel" : "Hotel Keppler",
+                      "numPers" : 2,
+                      "airline" : "Air France",
+                      "hotelPrice" : "2000",
+                      "flightPrice" : "3000",
+                      "totalPrice" : "5000",
+                      "hotelId" : "2250",
+                      "flightId" : "6682"
+                    }      
+
+/packages:
+  type: base
+  get:
+    is: [filterable]
+    responses:
+      201:
+        body:
+          example: |
+            {
+                  "packages" :  [
+                    {
+                      "startDate" : "2013-10-22",
+                      "returnDate" : "2013-10-29",
+                      "destCountry" : "France",
+                      "destCity" : "Paris",
+                      "departureAirport" : "EZE",
+                      "hotel" : "Hotel Keppler",
+                      "numPers" : 2,
+                      "airline" : "Air France",
+                      "hotelPrice" : "2000",
+                      "flightPrice" : "3000",
+                      "totalPrice" : "5000",
+                      "hotelId" : "2250",
+                      "flightId" : "6682"
+                    },
+                    {
+                      "startDate" : "2013-07-22",
+                      "returnDate" : "2013-08-29",
+                      "destCountry" : "Germany",
+                      "destCity" : "Frankfurt",
+                      "departureAirport" : "EZE",
+                      "hotel" : "Adler Hotel",
+                      "numPers" : 1,
+                      "airline" : "Lufthansa",
+                      "hotelPrice" : "2500",
+                      "flightPrice" : "3000",
+                      "totalPrice" : "5500",
+                      "hotelId" : "2250",
+                      "flightId" : "6682"
+                    }
+                  ]
+                }

@@ -29,7 +29,7 @@ import org.mule.transformer.simple.ObjectToString;
 import org.mule.transformer.types.DataTypeFactory;
 import org.mule.transport.http.HttpMuleMessageFactory;
 
-@Generated(value = "Mule DevKit Version 3.4.0", date = "2013-11-13T05:00:27-03:00", comments = "Build 3.4.0.1555.8df15c1")
+@Generated(value = "Mule DevKit Version 3.4.0", date = "2013-11-19T04:02:39-03:00", comments = "Build 3.4.0.1555.8df15c1")
 public class ExpediaConnectorConnectorRestClientAdapter
     extends ExpediaConnectorConnectorConnectionIdentifierAdapter
     implements MuleContextAware, Disposable, Initialisable
@@ -95,7 +95,7 @@ public class ExpediaConnectorConnectorRestClientAdapter
         this.responseTimeout = value;
     }
 
-    public String getHotelData(String apiKey, String currencyCode, String countryCode, String city, String arrivalDate, String departureDate, String room1, String numberOfResults)
+    public String getHotelData(String apiKey, String currencyCode, String countryCode, String city, String arrivalDate, String departureDate, String room1, String numberOfResults, String _type)
         throws IOException
     {
         HttpMethod method = null;
@@ -111,6 +111,7 @@ public class ExpediaConnectorConnectorRestClientAdapter
         queryString.append("&").append("departureDate").append("=").append(String.valueOf(departureDate));
         queryString.append("&").append("room1").append("=").append(String.valueOf(room1));
         queryString.append("&").append("numberOfResults").append("=").append(String.valueOf(numberOfResults));
+        queryString.append("&").append("_type").append("=").append(String.valueOf(_type));
         if ((queryString.length()> 0)&&(queryString.charAt(0) == '&')) {
             queryString.deleteCharAt(0);
         }
@@ -121,7 +122,47 @@ public class ExpediaConnectorConnectorRestClientAdapter
         if ((output!= null)&&(!String.class.isAssignableFrom(String.class))) {
             DataType payloadOutputDataType = null;
             try {
-                Method reflectedMethod = ExpediaConnectorConnector.class.getMethod("getHotelData", String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class);
+                Method reflectedMethod = ExpediaConnectorConnector.class.getMethod("getHotelData", String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class);
+                payloadOutputDataType = DataTypeFactory.createFromReturnType(reflectedMethod);
+                DataType payloadInputDataType = DataTypeFactory.create(String.class, ((String) muleMessage.getOutboundProperty("Content-Type")));
+                Transformer transformer = getPayloadTransformer(payloadInputDataType, payloadOutputDataType);
+                return ((String) transformer.transform(output));
+            } catch (TransformerException te) {
+                throw new RuntimeException(("Unable to transform output from String to "+ payloadOutputDataType.toString()), te);
+            } catch (NoSuchMethodException nsme) {
+                throw new RuntimeException("Unable to find method named getHotelData", nsme);
+            }
+        } else {
+            return ((String)((Object) output));
+        }
+    }
+
+    public String getHotelData(String apiKey, String currencyCode, String arrivalDate, String departureDate, String room1, String hotelIdList, String _type)
+        throws IOException
+    {
+        HttpMethod method = null;
+        method = new GetMethod();
+        String uri = "http://api.ean.com/ean-services/rs/hotel/v3/list?";
+        method.setURI(new URI(uri, false));
+        StringBuilder queryString = new StringBuilder(((method.getQueryString()!= null)?method.getQueryString():""));
+        queryString.append("&").append("apiKey").append("=").append(String.valueOf(apiKey));
+        queryString.append("&").append("currencyCode").append("=").append(String.valueOf(currencyCode));
+        queryString.append("&").append("arrivalDate").append("=").append(String.valueOf(arrivalDate));
+        queryString.append("&").append("departureDate").append("=").append(String.valueOf(departureDate));
+        queryString.append("&").append("room1").append("=").append(String.valueOf(room1));
+        queryString.append("&").append("hotelIdList").append("=").append(String.valueOf(hotelIdList));
+        queryString.append("&").append("_type").append("=").append(String.valueOf(_type));
+        if ((queryString.length()> 0)&&(queryString.charAt(0) == '&')) {
+            queryString.deleteCharAt(0);
+        }
+        method.setQueryString(URIUtil.encodeQuery(queryString.toString()));
+        httpClient.executeMethod(method);
+        MuleMessage muleMessage = getMuleMessage(method, "UTF-8");
+        String output = ((String) muleMessage.getPayload());
+        if ((output!= null)&&(!String.class.isAssignableFrom(String.class))) {
+            DataType payloadOutputDataType = null;
+            try {
+                Method reflectedMethod = ExpediaConnectorConnector.class.getMethod("getHotelData", String.class, String.class, String.class, String.class, String.class, String.class, String.class);
                 payloadOutputDataType = DataTypeFactory.createFromReturnType(reflectedMethod);
                 DataType payloadInputDataType = DataTypeFactory.create(String.class, ((String) muleMessage.getOutboundProperty("Content-Type")));
                 Transformer transformer = getPayloadTransformer(payloadInputDataType, payloadOutputDataType);

@@ -47,6 +47,21 @@ http://www.mulesoft.org/schema/mule/xml http://www.mulesoft.org/schema/mule/xml/
     <tiket:config name="Tiket" myProperty="whatevs" doc:name="Tiket">
         <tiket:connection-pooling-profile initialisationPolicy="INITIALISE_ONE" exhaustedAction="WHEN_EXHAUSTED_GROW"/>
     </tiket:config>
+    <mongo:config name="Mongo_DB1" database="trippackage" doc:name="Mongo DB">
+        <mongo:connection-pooling-profile initialisationPolicy="INITIALISE_ONE" exhaustedAction="WHEN_EXHAUSTED_GROW"/>
+    </mongo:config>
+    <mongo:config name="Mongo_DB2" database="trippackage" doc:name="Mongo DB">
+        <mongo:connection-pooling-profile initialisationPolicy="INITIALISE_ONE" exhaustedAction="WHEN_EXHAUSTED_GROW"/>
+    </mongo:config>
+    <mongo:config name="Mongo_DB3" database="trippackage" doc:name="Mongo DB">
+        <mongo:connection-pooling-profile initialisationPolicy="INITIALISE_ONE" exhaustedAction="WHEN_EXHAUSTED_GROW"/>
+    </mongo:config>
+    <mongo:config name="Mongo_DB4" database="trippackage" doc:name="Mongo DB">
+        <mongo:connection-pooling-profile initialisationPolicy="INITIALISE_ONE" exhaustedAction="WHEN_EXHAUSTED_GROW"/>
+    </mongo:config>
+    <mongo:config name="Mongo_DB5" database="trippackage" doc:name="Mongo DB">
+        <mongo:connection-pooling-profile initialisationPolicy="INITIALISE_ONE" exhaustedAction="WHEN_EXHAUSTED_GROW"/>
+    </mongo:config>
     <flow name="main" doc:name="main">
         <http:inbound-endpoint address="http://localhost:8081/trip-package/api" doc:name="HTTP" exchange-pattern="request-response"/>
         <apikit:router config-ref="apiConfig" doc:name="APIkit Router"/>
@@ -54,40 +69,55 @@ http://www.mulesoft.org/schema/mule/xml http://www.mulesoft.org/schema/mule/xml/
     </flow>
     <flow name="get:/packages:apiConfig" doc:name="get:/packages:apiConfig">
         <set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
-        <expression-component doc:name="Expression"><![CDATA[app.registry['startYear'] = message.inboundProperties.startDate.substring(0, 4);
-app.registry['startMonth'] = message.inboundProperties.startDate.substring(5, 7);
-app.registry['startDay'] = message.inboundProperties.startDate.substring(8, 10);
-app.registry['returnYear'] = message.inboundProperties.returnDate.substring(0, 4);
-app.registry['returnMonth'] = message.inboundProperties.returnDate.substring(5, 7);
-app.registry['returnDay'] = message.inboundProperties.returnDate.substring(8, 10);]]></expression-component>
-        <expediaconnector:get-hotel-data config-ref="Expedia" apiKey="phr23ratvzk3cmyxwv5a8ft4" arrivalDate="#[app.registry['startMonth'] +&quot;/&quot;+app.registry['startDay']+&quot;/&quot;+app.registry['startYear']]" city="#[message.inboundProperties.destCity.trim()]" countryCode="#[message.inboundProperties.destCountry.trim()]" currencyCode="USD" departureDate="#[app.registry['returnMonth'] +&quot;/&quot;+app.registry['returnDay']+&quot;/&quot;+app.registry['returnYear']]" numberOfResults="3" room1="#[message.inboundProperties.numPers.trim()]" doc:name="Expedia"/>
-        <tiket:get-token config-ref="Tiket" outputtoken="xml" secretkey="7ffa9007da5aeeaaa88e8ad8079b8f33" doc:name="Tiket"/>
-        <logger message="#[payload]" level="INFO" doc:name="Logger"/>
+        <expression-component doc:name="Expression"><![CDATA[flowVars['startYear'] = message.inboundProperties.startDate.substring(0, 4);
+flowVars['startMonth'] = message.inboundProperties.startDate.substring(5, 7);
+flowVars['startDay'] = message.inboundProperties.startDate.substring(8, 10);
+flowVars['returnYear'] = message.inboundProperties.returnDate.substring(0, 4);
+flowVars['returnMonth'] = message.inboundProperties.returnDate.substring(5, 7);
+flowVars['returnDay'] = message.inboundProperties.returnDate.substring(8, 10);]]></expression-component>
+        <expediaconnector:get-hotel-data config-ref="Expedia" apiKey="phr23ratvzk3cmyxwv5a8ft4" arrivalDate="#[flowVars['startMonth'] +&quot;/&quot;+flowVars['startDay']+&quot;/&quot;+flowVars['startYear']]" city="#[message.inboundProperties.destCity.trim()]" countryCode="#[message.inboundProperties.destCountry.trim()]" currencyCode="USD" departureDate="#[flowVars['returnMonth'] +&quot;/&quot;+flowVars['returnDay']+&quot;/&quot;+flowVars['returnYear']]" numberOfResults="3" room1="#[message.inboundProperties.numPers.trim()]" doc:name="Expedia" _type="json"/>
+        <set-variable variableName="arrivalAirport" value="#[json:HotelListResponse/HotelList/HotelSummary[0]/airportCode]" doc:name="Variable"/>
         <set-variable variableName="hotelData" value="#[payload]" doc:name="Variable"/>
-        <logger message="#[xpath('/tiket/token/text()', flowVars['hotelData']).text]" level="INFO" doc:name="Logger"/>
-        <set-payload value="{&quot;hotels&quot;:[{&quot;hotel&quot;:&quot;#[json:HotelListResponse/HotelList/HotelSummary[0]/name]&quot;, &quot;hotelPrice&quot;:&quot;#[json:HotelListResponse/HotelList/HotelSummary[0]/RoomRateDetailsList/RoomRateDetails/RateInfo/ChargeableRateInfo/@total]&quot;, &quot;hotelId&quot;:&quot;#[json:HotelListResponse/HotelList/HotelSummary[0]/hotelId]&quot;},{&quot;hotel&quot;:&quot;#[json:HotelListResponse/HotelList/HotelSummary[1]/name]&quot;, &quot;hotelPrice&quot;:&quot;#[json:HotelListResponse/HotelList/HotelSummary[1]/RoomRateDetailsList/RoomRateDetails/RateInfo/ChargeableRateInfo/@total]&quot;, &quot;hotelId&quot;:&quot;#[json:HotelListResponse/HotelList/HotelSummary[1]/hotelId]&quot;},{&quot;hotel&quot;:&quot;#[json:HotelListResponse/HotelList/HotelSummary[2]/name]&quot;, &quot;hotelPrice&quot;:&quot;#[json:HotelListResponse/HotelList/HotelSummary[2]/RoomRateDetailsList/RoomRateDetails/RateInfo/ChargeableRateInfo/@total]&quot;, &quot;hotelId&quot;:&quot;#[json:HotelListResponse/HotelList/HotelSummary[2]/hotelId]&quot;}]}" doc:name="Set Payload"/>
+        <tiket:get-token config-ref="Tiket" outputtoken="xml" secretkey="7ffa9007da5aeeaaa88e8ad8079b8f33" doc:name="Tiket"/>
+        <set-variable variableName="tiketToken" value="#[xpath('tiket/token/text()').text]" doc:name="Variable"/>
+        <tiket:search-flights config-ref="Tiket" a="#[flowVars['arrivalAirport']]"  d="#[message.inboundProperties.departureAirport.trim()]" date="#[message.inboundProperties.startDate.trim()]" outputsf="xml" token="#[flowVars['tiketToken']]" doc:name="Tiket" adult="#[message.inboundProperties.numPers.trim()]"/>
+        <logger message="#[payload]" level="INFO" doc:name="Logger"/>
+        <expression-component doc:name="Expression"><![CDATA[flowVars['flightData'] = payload;
+payload = flowVars['hotelData'];]]></expression-component>
+        <set-variable variableName="response" value="{#[&quot;\n&quot;]#[&quot;\t&quot;]&quot;packages&quot;: [  #[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;package&quot;:{ #[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;startDate&quot;:&quot;#[message.inboundProperties.startDate.trim()]&quot;,#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;returnDate&quot;:&quot;#[message.inboundProperties.returnDate.trim()]&quot;,#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;destCountry&quot;:&quot;#[message.inboundProperties.destCountry.trim()]&quot;,#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;destCity&quot;:&quot;#[message.inboundProperties.destCity.trim()]&quot;,#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;departureAirport&quot;:&quot;#[message.inboundProperties.departureAirport.trim()]&quot;,#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;numPers&quot;:&quot;#[message.inboundProperties.numPers.trim()]&quot;,#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;airline&quot;:&quot;#[xpath('//result[1]/airlines_name/text()', flowVars['flightData']).text]&quot;,#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;flightPrice&quot;:&quot;#[xpath('//result[1]/price_value/text()', flowVars['flightData']).text]&quot;,#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;flightId&quot;:&quot;#[xpath('//result[1]/flight_id/text()', flowVars['flightData']).text]&quot;, " doc:name="Variable"/>
+        <set-payload value="#[flowVars['hotelData']]" doc:name="Set Payload"/>
+        <set-variable variableName="response" value="#[flowVars['response']]#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;hotel&quot;:&quot;#[json:HotelListResponse/HotelList/HotelSummary[0]/name]&quot;,#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;hotelId&quot;:&quot;#[json:HotelListResponse/HotelList/HotelSummary[0]/hotelId]&quot;, #[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;hotelPrice&quot;:&quot;#[json:HotelListResponse/HotelList/HotelSummary[0]/RoomRateDetailsList/RoomRateDetails/RateInfo/ChargeableRateInfo/@total]&quot;#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]}," doc:name="Variable"/>
+        <set-variable variableName="response" value="#[flowVars['response']]#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;package&quot;:{ #[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;startDate&quot;:&quot;#[message.inboundProperties.startDate.trim()]&quot;,#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;returnDate&quot;:&quot;#[message.inboundProperties.returnDate.trim()]&quot;,#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;destCountry&quot;:&quot;#[message.inboundProperties.destCountry.trim()]&quot;,#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;destCity&quot;:&quot;#[message.inboundProperties.destCity.trim()]&quot;,#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;departureAirport&quot;:&quot;#[message.inboundProperties.departureAirport.trim()]&quot;,#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;numPers&quot;:&quot;#[message.inboundProperties.numPers.trim()]&quot;,#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;airline&quot;:&quot;#[xpath('//result[1]/airlines_name/text()', flowVars['flightData']).text]&quot;,#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;flightPrice&quot;:&quot;#[xpath('//result[1]/price_value/text()', flowVars['flightData']).text]&quot;,#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;flightId&quot;:&quot;#[xpath('//result[1]/flight_id/text()', flowVars['flightData']).text]&quot;, " doc:name="Variable"/>
+        <set-payload value="#[flowVars['hotelData']]" doc:name="Set Payload"/>
+        <set-variable variableName="response" value="#[flowVars['response']]#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;hotel&quot;:&quot;#[json:HotelListResponse/HotelList/HotelSummary[1]/name]&quot;,#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;hotelId&quot;:&quot;#[json:HotelListResponse/HotelList/HotelSummary[1]/hotelId]&quot;, #[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;hotelPrice&quot;:&quot;#[json:HotelListResponse/HotelList/HotelSummary[1]/RoomRateDetailsList/RoomRateDetails/RateInfo/ChargeableRateInfo/@total]&quot;#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]}," doc:name="Variable"/>
+        <set-variable variableName="response" value="#[flowVars['response']]#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;package&quot;:{ #[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;startDate&quot;:&quot;#[message.inboundProperties.startDate.trim()]&quot;,#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;returnDate&quot;:&quot;#[message.inboundProperties.returnDate.trim()]&quot;,#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;destCountry&quot;:&quot;#[message.inboundProperties.destCountry.trim()]&quot;,#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;destCity&quot;:&quot;#[message.inboundProperties.destCity.trim()]&quot;,#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;departureAirport&quot;:&quot;#[message.inboundProperties.departureAirport.trim()]&quot;,#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;numPers&quot;:&quot;#[message.inboundProperties.numPers.trim()]&quot;,#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;airline&quot;:&quot;#[xpath('//result[1]/airlines_name/text()', flowVars['flightData']).text]&quot;,#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;flightPrice&quot;:&quot;#[xpath('//result[1]/price_value/text()', flowVars['flightData']).text]&quot;,#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;flightId&quot;:&quot;#[xpath('//result[1]/flight_id/text()', flowVars['flightData']).text]&quot;, " doc:name="Variable"/>
+        <set-payload value="#[flowVars['hotelData']]" doc:name="Set Payload"/>
+        <set-variable variableName="response" value="#[flowVars['response']]#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;hotel&quot;:&quot;#[json:HotelListResponse/HotelList/HotelSummary[2]/name]&quot;,#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;hotelId&quot;:&quot;#[json:HotelListResponse/HotelList/HotelSummary[2]/hotelId]&quot;, #[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;hotelPrice&quot;:&quot;#[json:HotelListResponse/HotelList/HotelSummary[2]/RoomRateDetailsList/RoomRateDetails/RateInfo/ChargeableRateInfo/@total]&quot;#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]} #[&quot;\n&quot;]#[&quot;\t&quot;]] #[&quot;\n&quot;]}" doc:name="Variable"/>
+        <set-payload value="#[flowVars['response']]" doc:name="Set Payload"/>
     </flow>
     <flow name="get:/users/{user}:apiConfig" doc:name="get:/users/{user}:apiConfig">
         <set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
         <set-payload value="{username:&quot;#[user]&quot;}" doc:name="Set Payload"/>
-        <mongo:find-one-object config-ref="Mongo_DB" collection="users" failOnNotFound="false" doc:name="Mongo DB"/>
-        <mongo:mongo-collection-to-json doc:name="Mongo DB"/>
+        <mongo:find-one-object config-ref="Mongo_DB" collection="users"  doc:name="Mongo DB"/>
+        <mongo:dbobject-to-json doc:name="Mongo DB"/>
         <set-payload value="{&quot;id&quot;:&quot;#[json:_id/$oid]&quot;,&quot;username&quot;:&quot;#[json:username]&quot;, &quot;city&quot;:&quot;#[json:city]&quot;,&quot;country&quot;:&quot;#[json:country]&quot;}" doc:name="Set Payload"/>
     </flow>
     <flow name="get:/users/{user}/packages:apiConfig" doc:name="get:/users/{user}/packages:apiConfig">
         <set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
-        <set-payload value="{username:&quot;#[user]&quot;}" doc:name="Set Payload"/>
-        <mongo:find-objects config-ref="Mongo_DB" collection="packages"  doc:name="Mongo DB">
+        <set-payload value="{user:&quot;#[user]&quot;}" doc:name="Set Payload"/>
+        <logger message="#[payload]" level="INFO" doc:name="Logger"/>
+        <mongo:find-objects config-ref="Mongo_DB3" collection="packages"  doc:name="Mongo DB">
         </mongo:find-objects>
         <mongo:mongo-collection-to-json doc:name="Mongo DB"/>
     </flow>
     <flow name="get:/users/{user}/packages/{package}:apiConfig" doc:name="get:/users/{user}/packages/{package}:apiConfig">
         <set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
-        <set-payload value="{&#xA;   &quot;startDate&quot; : &quot;2013-10-22&quot;,&#xA;   &quot;returnDate&quot; : &quot;2013-10-29&quot;,&#xA;   &quot;destCountry&quot; : &quot;France&quot;,&#xA;   &quot;destCity&quot; : &quot;Paris&quot;,&#xA;   &quot;departureAirport&quot; : &quot;EZE&quot;,&#xA;   &quot;hotel&quot; : &quot;Hotel Keppler&quot;,&#xA;   &quot;numPers&quot; : 2,&#xA;   &quot;airline&quot; : &quot;Air France&quot;,&#xA;   &quot;hotelPrice&quot; : &quot;2000&quot;,&#xA;   &quot;flightPrice&quot; : &quot;3000&quot;,&#xA;   &quot;totalPrice&quot; : &quot;5000&quot;,&#xA;   &quot;hotelId&quot; : &quot;2250&quot;,&#xA;   &quot;flightId&quot; : &quot;6682&quot;&#xA; }" doc:name="Set Payload"/>
+        <set-payload value="{'_id.$oid':'#[package]'}" doc:name="Set Payload"/>
+        <mongo:find-objects-using-query-map config-ref="Mongo_DB" collection="packages" doc:name="Mongo DB"/>
     </flow>
     <flow name="post:/users:apiConfig" doc:name="post:/users:apiConfig">
         <set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
-        <mongo:save-object config-ref="Mongo_DB" collection="packages" doc:name="Mongo DB"/>
+        <mongo:save-object config-ref="Mongo_DB" collection="users" doc:name="Mongo DB"/>
     </flow>
     <flow name="post:/users/{user}/packages:apiConfig" doc:name="post:/users/{user}/packages:apiConfig">
         <set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>

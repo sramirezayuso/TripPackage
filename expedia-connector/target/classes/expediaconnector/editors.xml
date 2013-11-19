@@ -66,6 +66,7 @@
       <group caption="Generic" id="expediaconnectorConnectorGeneric">
         <modeSwitch alwaysCombo="true" description="Operation." caption="Operation" name="Expediaconnector operations to execute">
           <mode modeLabel="Get hotel data" modeId="http://www.mulesoft.org/schema/mule/expediaconnector/get-hotel-data"></mode>
+          <mode modeLabel="Get hotel data" modeId="http://www.mulesoft.org/schema/mule/expediaconnector/get-hotel-data"></mode>
           <mode modeLabel="My processor" modeId="http://www.mulesoft.org/schema/mule/expediaconnector/my-processor"></mode>
           <mode modeLabel="Say hello" modeId="http://www.mulesoft.org/schema/mule/expediaconnector/say-hello"></mode>
         </modeSwitch>
@@ -75,6 +76,7 @@
   <cloud-connector returnType="java.lang.String" extends="http://www.mulesoft.org/schema/mule/expediaconnector/abstractExpediaconnectorConnectorGeneric" abstract="true" image="icons/large/expediaconnector-connector-48x32.png" localId="get-hotel-data" icon="icons/small/expediaconnector-connector-24x16.png" description="" caption="Get Hotel Data">
     <attribute-category description="General." caption="General">
       <group caption="General" id="general">
+        <string javaType="java.lang.String" required="true" description="Output format." caption="_type" name="_type"></string>
         <string javaType="java.lang.String" required="true" description="Key to use api." caption="Api Key" name="apiKey"></string>
         <string javaType="java.lang.String" required="true" description="Date of arrival." caption="Arrival Date" name="arrivalDate"></string>
         <string javaType="java.lang.String" required="true" description="A city." caption="City" name="city"></string>

@@ -8,7 +8,7 @@ import javax.annotation.Generated;
  *  Enumeration of possible capabilities of Mule modules. Each capability represents a bit in a bit array. The capabilities of a particular module can be queried using {@link Capabilities}
  * 
  */
-@Generated(value = "Mule DevKit Version 3.4.0", date = "2013-11-13T05:00:27-03:00", comments = "Build 3.4.0.1555.8df15c1")
+@Generated(value = "Mule DevKit Version 3.4.0", date = "2013-11-19T04:02:39-03:00", comments = "Build 3.4.0.1555.8df15c1")
 public enum Capability {
 
      /**

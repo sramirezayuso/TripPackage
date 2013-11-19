@@ -29,7 +29,7 @@ import org.mule.transformer.types.DataTypeFactory;
 import org.mule.transport.http.HttpMuleMessageFactory;
 import org.tiket.TiketConnector;
 
-@Generated(value = "Mule DevKit Version 3.4.0", date = "2013-11-16T03:08:13-03:00", comments = "Build 3.4.0.1555.8df15c1")
+@Generated(value = "Mule DevKit Version 3.4.0", date = "2013-11-19T04:05:26-03:00", comments = "Build 3.4.0.1555.8df15c1")
 public class TiketConnectorRestClientAdapter
     extends TiketConnectorConnectionIdentifierAdapter
     implements MuleContextAware, Disposable, Initialisable
@@ -95,7 +95,7 @@ public class TiketConnectorRestClientAdapter
         this.responseTimeout = value;
     }
 
-    public String searchFlights(String token, String d, String a, String date, String adults, String outputsf)
+    public String searchFlights(String token, String d, String a, String date, String adult, String outputsf)
         throws IOException
     {
         HttpMethod method = null;
@@ -107,7 +107,7 @@ public class TiketConnectorRestClientAdapter
         queryString.append("&").append("d").append("=").append(String.valueOf(d));
         queryString.append("&").append("a").append("=").append(String.valueOf(a));
         queryString.append("&").append("date").append("=").append(String.valueOf(date));
-        queryString.append("&").append("adults").append("=").append(String.valueOf(adults));
+        queryString.append("&").append("adult").append("=").append(String.valueOf(adult));
         queryString.append("&").append("output").append("=").append(String.valueOf(outputsf));
         if ((queryString.length()> 0)&&(queryString.charAt(0) == '&')) {
             queryString.deleteCharAt(0);

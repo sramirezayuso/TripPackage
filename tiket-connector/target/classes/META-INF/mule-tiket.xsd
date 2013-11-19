@@ -111,7 +111,7 @@
             <xs:documentation>date of departure</xs:documentation>
           </xs:annotation>
         </xs:attribute>
-        <xs:attribute name="adults" use="required" type="xs:string">
+        <xs:attribute name="adult" use="required" type="xs:string">
           <xs:annotation>
             <xs:documentation>number of passengers</xs:documentation>
           </xs:annotation>

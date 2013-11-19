@@ -79,57 +79,329 @@
             </property-collection>
         </properties>
     </global-element>
-    <global-element name="Tiket" type="http://www.mulesoft.org/schema/mule/tiket/config" entity-id="!!!0c3c3c4f-9163-4162-b125-127ba0e1dd0a">
+    <global-element name="Tiket" type="http://www.mulesoft.org/schema/mule/tiket/config" entity-id="Tiket#1">
         <properties>
+            <property name="username"/>
+            <property name="myProperty" value="whatevs"/>
+            <property name="name" value="Tiket"/>
+            <property name="password"/>
+            <property name="auxiliary;index" value="27"/>
+            <property-collection name="@http://www.mulesoft.org/schema/mule/tiket/connection-pooling-profile;0">
+                <property name="exhaustedAction" value="WHEN_EXHAUSTED_GROW"/>
+                <property name="isProcessed$$$$" value="true"/>
+                <property name="auxiliary;index" value="28"/>
+                <property name="auxiliary;wrapIn" value="28"/>
+                <property name="initialisationPolicy" value="INITIALISE_ONE"/>
+            </property-collection>
+        </properties>
+    </global-element>
+    <global-element name="Mongo DB" type="http://www.mulesoft.org/schema/mule/mongo/config" entity-id="!!!308616fc-4641-44bc-9904-0f8c5b069c9b">
+        <properties>
+            <property name="port" value="27017"/>
             <property name="maxIdle" value="5"/>
-            <property name="d" value=""/>
             <property name="poolingProfileLabel" value=""/>
             <property name="count" value="2"/>
             <property name="customReconnection" value="false"/>
             <property name="standardReconnection" value="false"/>
-            <property name="class" value=""/>
+            <property name="connectionsPerHost" value=""/>
             <property name="frequency" value="2000"/>
             <property name="reconnectForever" value="false"/>
             <property name="password" value=""/>
             <property name="noReconnection" value="true"/>
-            <property name="maxActive" value="5"/>
             <property name="exhaustedAction" value="WHEN_EXHAUSTED_GROW"/>
-            <property name="blocking" value="true"/>
+            <property name="maxActive" value="5"/>
+            <property name="auxiliary;erased;maxWaitTime" value="true"/>
+            <property name="connectTimeout" value="30000"/>
             <property name="username" value=""/>
-            <property name="myProperty" value="whatevs"/>
-            <property name="name" value="Tiket"/>
+            <property name="socketTimeout" value=""/>
+            <property name="name" value="Mongo_DB1"/>
+            <property name="evictionCheckIntervalMillis" value="-1"/>
             <property name="maxWait" value="5"/>
+            <property name="auxiliary;erased;connectionsPerHost" value="true"/>
+            <property name="auxiliary;erased;threadsAllowedToBlockForConnectionMultiplier" value="true"/>
+            <property name="threadsAllowedToBlockForConnectionMultiplier" value=""/>
             <property name="initialisationPolicy" value="INITIALISE_ONE"/>
+            <property name="d" value=""/>
+            <property name="host" value="localhost"/>
+            <property name="class" value=""/>
+            <property name="maxWaitTime" value=""/>
+            <property name="autoConnectRetry" value="false"/>
+            <property name="database" value="trippackage"/>
+            <property name="auxiliary;erased;socketTimeout" value="true"/>
+            <property name="blocking" value="true"/>
+            <property name="minEvictionMillis" value="1800000"/>
             <property-collection name="">
-                <property name="blocking" value="true"/>
                 <property name="d" value=""/>
-                <property name="customReconnection" value="false"/>
+                <property name="blocking" value="true"/>
                 <property name="count" value="2"/>
+                <property name="customReconnection" value="false"/>
                 <property name="standardReconnection" value="false"/>
                 <property name="class" value=""/>
                 <property name="frequency" value="2000"/>
                 <property name="reconnectForever" value="false"/>
                 <property name="noReconnection" value="true"/>
             </property-collection>
-            <property-collection name="@http://www.mulesoft.org/schema/mule/tiket/connection-pooling-profile;24659590">
-                <property name="exhaustedAction" value="WHEN_EXHAUSTED_GROW"/>
+            <property-collection name="@http://www.mulesoft.org/schema/mule/mongo/connection-pooling-profile;26753332">
                 <property name="maxActive" value="5"/>
+                <property name="exhaustedAction" value="WHEN_EXHAUSTED_GROW"/>
                 <property name="maxIdle" value="5"/>
                 <property name="poolingProfileLabel" value=""/>
                 <property name="maxWait" value="5"/>
+                <property name="evictionCheckIntervalMillis" value="-1"/>
                 <property name="isProcessed$$$$" value="true"/>
+                <property name="minEvictionMillis" value="1800000"/>
                 <property name="initialisationPolicy" value="INITIALISE_ONE"/>
             </property-collection>
         </properties>
         <description></description>
     </global-element>
-    <flow SubFlow="false" name="main" entity-id="f36ac676-63bb-46f9-a179-b78c77431e21">
+    <global-element name="Mongo DB" type="http://www.mulesoft.org/schema/mule/mongo/config" entity-id="!!!025a7f84-4e79-4f60-98b6-f4bd3ecc45ed">
+        <properties>
+            <property name="port" value="27017"/>
+            <property name="maxIdle" value="5"/>
+            <property name="poolingProfileLabel" value=""/>
+            <property name="count" value="2"/>
+            <property name="customReconnection" value="false"/>
+            <property name="standardReconnection" value="false"/>
+            <property name="connectionsPerHost" value=""/>
+            <property name="frequency" value="2000"/>
+            <property name="reconnectForever" value="false"/>
+            <property name="password" value=""/>
+            <property name="noReconnection" value="true"/>
+            <property name="exhaustedAction" value="WHEN_EXHAUSTED_GROW"/>
+            <property name="maxActive" value="5"/>
+            <property name="auxiliary;erased;maxWaitTime" value="true"/>
+            <property name="connectTimeout" value="30000"/>
+            <property name="username" value=""/>
+            <property name="socketTimeout" value=""/>
+            <property name="name" value="Mongo_DB2"/>
+            <property name="evictionCheckIntervalMillis" value="-1"/>
+            <property name="maxWait" value="5"/>
+            <property name="auxiliary;erased;connectionsPerHost" value="true"/>
+            <property name="auxiliary;erased;threadsAllowedToBlockForConnectionMultiplier" value="true"/>
+            <property name="threadsAllowedToBlockForConnectionMultiplier" value=""/>
+            <property name="initialisationPolicy" value="INITIALISE_ONE"/>
+            <property name="d" value=""/>
+            <property name="host" value="localhost"/>
+            <property name="class" value=""/>
+            <property name="maxWaitTime" value=""/>
+            <property name="autoConnectRetry" value="false"/>
+            <property name="database" value="trippackage"/>
+            <property name="auxiliary;erased;socketTimeout" value="true"/>
+            <property name="blocking" value="true"/>
+            <property name="minEvictionMillis" value="1800000"/>
+            <property-collection name="">
+                <property name="d" value=""/>
+                <property name="blocking" value="true"/>
+                <property name="count" value="2"/>
+                <property name="customReconnection" value="false"/>
+                <property name="standardReconnection" value="false"/>
+                <property name="class" value=""/>
+                <property name="frequency" value="2000"/>
+                <property name="reconnectForever" value="false"/>
+                <property name="noReconnection" value="true"/>
+            </property-collection>
+            <property-collection name="@http://www.mulesoft.org/schema/mule/mongo/connection-pooling-profile;24491957">
+                <property name="maxActive" value="5"/>
+                <property name="exhaustedAction" value="WHEN_EXHAUSTED_GROW"/>
+                <property name="maxIdle" value="5"/>
+                <property name="poolingProfileLabel" value=""/>
+                <property name="maxWait" value="5"/>
+                <property name="evictionCheckIntervalMillis" value="-1"/>
+                <property name="isProcessed$$$$" value="true"/>
+                <property name="minEvictionMillis" value="1800000"/>
+                <property name="initialisationPolicy" value="INITIALISE_ONE"/>
+            </property-collection>
+        </properties>
+        <description></description>
+    </global-element>
+    <global-element name="Mongo DB" type="http://www.mulesoft.org/schema/mule/mongo/config" entity-id="!!!602af91c-7b8a-48ca-8ed1-91b6e92865b3">
+        <properties>
+            <property name="port" value="27017"/>
+            <property name="maxIdle" value="5"/>
+            <property name="poolingProfileLabel" value=""/>
+            <property name="count" value="2"/>
+            <property name="customReconnection" value="false"/>
+            <property name="standardReconnection" value="false"/>
+            <property name="connectionsPerHost" value=""/>
+            <property name="frequency" value="2000"/>
+            <property name="reconnectForever" value="false"/>
+            <property name="password" value=""/>
+            <property name="noReconnection" value="true"/>
+            <property name="exhaustedAction" value="WHEN_EXHAUSTED_GROW"/>
+            <property name="maxActive" value="5"/>
+            <property name="auxiliary;erased;maxWaitTime" value="true"/>
+            <property name="connectTimeout" value="30000"/>
+            <property name="username" value=""/>
+            <property name="socketTimeout" value=""/>
+            <property name="name" value="Mongo_DB3"/>
+            <property name="evictionCheckIntervalMillis" value="-1"/>
+            <property name="maxWait" value="5"/>
+            <property name="auxiliary;erased;connectionsPerHost" value="true"/>
+            <property name="auxiliary;erased;threadsAllowedToBlockForConnectionMultiplier" value="true"/>
+            <property name="threadsAllowedToBlockForConnectionMultiplier" value=""/>
+            <property name="initialisationPolicy" value="INITIALISE_ONE"/>
+            <property name="d" value=""/>
+            <property name="host" value="localhost"/>
+            <property name="class" value=""/>
+            <property name="maxWaitTime" value=""/>
+            <property name="autoConnectRetry" value="false"/>
+            <property name="database" value="trippackage"/>
+            <property name="auxiliary;erased;socketTimeout" value="true"/>
+            <property name="blocking" value="true"/>
+            <property name="minEvictionMillis" value="1800000"/>
+            <property-collection name="">
+                <property name="d" value=""/>
+                <property name="blocking" value="true"/>
+                <property name="count" value="2"/>
+                <property name="customReconnection" value="false"/>
+                <property name="standardReconnection" value="false"/>
+                <property name="class" value=""/>
+                <property name="frequency" value="2000"/>
+                <property name="reconnectForever" value="false"/>
+                <property name="noReconnection" value="true"/>
+            </property-collection>
+            <property-collection name="@http://www.mulesoft.org/schema/mule/mongo/connection-pooling-profile;18075536">
+                <property name="maxActive" value="5"/>
+                <property name="exhaustedAction" value="WHEN_EXHAUSTED_GROW"/>
+                <property name="maxIdle" value="5"/>
+                <property name="poolingProfileLabel" value=""/>
+                <property name="maxWait" value="5"/>
+                <property name="evictionCheckIntervalMillis" value="-1"/>
+                <property name="isProcessed$$$$" value="true"/>
+                <property name="minEvictionMillis" value="1800000"/>
+                <property name="initialisationPolicy" value="INITIALISE_ONE"/>
+            </property-collection>
+        </properties>
+        <description></description>
+    </global-element>
+    <global-element name="Mongo DB" type="http://www.mulesoft.org/schema/mule/mongo/config" entity-id="!!!62e68956-b42d-43a6-8d64-b21423a56af2">
+        <properties>
+            <property name="port" value="27017"/>
+            <property name="maxIdle" value="5"/>
+            <property name="poolingProfileLabel" value=""/>
+            <property name="count" value="2"/>
+            <property name="customReconnection" value="false"/>
+            <property name="standardReconnection" value="false"/>
+            <property name="connectionsPerHost" value=""/>
+            <property name="frequency" value="2000"/>
+            <property name="reconnectForever" value="false"/>
+            <property name="password" value=""/>
+            <property name="noReconnection" value="true"/>
+            <property name="exhaustedAction" value="WHEN_EXHAUSTED_GROW"/>
+            <property name="maxActive" value="5"/>
+            <property name="auxiliary;erased;maxWaitTime" value="true"/>
+            <property name="connectTimeout" value="30000"/>
+            <property name="username" value=""/>
+            <property name="socketTimeout" value=""/>
+            <property name="name" value="Mongo_DB4"/>
+            <property name="evictionCheckIntervalMillis" value="-1"/>
+            <property name="maxWait" value="5"/>
+            <property name="auxiliary;erased;connectionsPerHost" value="true"/>
+            <property name="auxiliary;erased;threadsAllowedToBlockForConnectionMultiplier" value="true"/>
+            <property name="threadsAllowedToBlockForConnectionMultiplier" value=""/>
+            <property name="initialisationPolicy" value="INITIALISE_ONE"/>
+            <property name="d" value=""/>
+            <property name="host" value="localhost"/>
+            <property name="class" value=""/>
+            <property name="maxWaitTime" value=""/>
+            <property name="autoConnectRetry" value="false"/>
+            <property name="database" value="trippackage"/>
+            <property name="auxiliary;erased;socketTimeout" value="true"/>
+            <property name="blocking" value="true"/>
+            <property name="minEvictionMillis" value="1800000"/>
+            <property-collection name="">
+                <property name="d" value=""/>
+                <property name="blocking" value="true"/>
+                <property name="count" value="2"/>
+                <property name="customReconnection" value="false"/>
+                <property name="standardReconnection" value="false"/>
+                <property name="class" value=""/>
+                <property name="frequency" value="2000"/>
+                <property name="reconnectForever" value="false"/>
+                <property name="noReconnection" value="true"/>
+            </property-collection>
+            <property-collection name="@http://www.mulesoft.org/schema/mule/mongo/connection-pooling-profile;4555082">
+                <property name="maxActive" value="5"/>
+                <property name="exhaustedAction" value="WHEN_EXHAUSTED_GROW"/>
+                <property name="maxIdle" value="5"/>
+                <property name="poolingProfileLabel" value=""/>
+                <property name="maxWait" value="5"/>
+                <property name="evictionCheckIntervalMillis" value="-1"/>
+                <property name="isProcessed$$$$" value="true"/>
+                <property name="minEvictionMillis" value="1800000"/>
+                <property name="initialisationPolicy" value="INITIALISE_ONE"/>
+            </property-collection>
+        </properties>
+        <description></description>
+    </global-element>
+    <global-element name="Mongo DB" type="http://www.mulesoft.org/schema/mule/mongo/config" entity-id="!!!f978df10-ff7a-4a5a-a627-85779ebc6369">
+        <properties>
+            <property name="port" value="27017"/>
+            <property name="maxIdle" value="5"/>
+            <property name="poolingProfileLabel" value=""/>
+            <property name="count" value="2"/>
+            <property name="customReconnection" value="false"/>
+            <property name="standardReconnection" value="false"/>
+            <property name="connectionsPerHost" value=""/>
+            <property name="frequency" value="2000"/>
+            <property name="reconnectForever" value="false"/>
+            <property name="password" value=""/>
+            <property name="noReconnection" value="true"/>
+            <property name="exhaustedAction" value="WHEN_EXHAUSTED_GROW"/>
+            <property name="maxActive" value="5"/>
+            <property name="auxiliary;erased;maxWaitTime" value="true"/>
+            <property name="connectTimeout" value="30000"/>
+            <property name="username" value=""/>
+            <property name="socketTimeout" value=""/>
+            <property name="name" value="Mongo_DB5"/>
+            <property name="evictionCheckIntervalMillis" value="-1"/>
+            <property name="maxWait" value="5"/>
+            <property name="auxiliary;erased;connectionsPerHost" value="true"/>
+            <property name="auxiliary;erased;threadsAllowedToBlockForConnectionMultiplier" value="true"/>
+            <property name="threadsAllowedToBlockForConnectionMultiplier" value=""/>
+            <property name="initialisationPolicy" value="INITIALISE_ONE"/>
+            <property name="d" value=""/>
+            <property name="host" value="localhost"/>
+            <property name="class" value=""/>
+            <property name="maxWaitTime" value=""/>
+            <property name="autoConnectRetry" value="false"/>
+            <property name="database" value="trippackage"/>
+            <property name="auxiliary;erased;socketTimeout" value="true"/>
+            <property name="blocking" value="true"/>
+            <property name="minEvictionMillis" value="1800000"/>
+            <property-collection name="">
+                <property name="d" value=""/>
+                <property name="blocking" value="true"/>
+                <property name="count" value="2"/>
+                <property name="customReconnection" value="false"/>
+                <property name="standardReconnection" value="false"/>
+                <property name="class" value=""/>
+                <property name="frequency" value="2000"/>
+                <property name="reconnectForever" value="false"/>
+                <property name="noReconnection" value="true"/>
+            </property-collection>
+            <property-collection name="@http://www.mulesoft.org/schema/mule/mongo/connection-pooling-profile;33420273">
+                <property name="maxActive" value="5"/>
+                <property name="exhaustedAction" value="WHEN_EXHAUSTED_GROW"/>
+                <property name="maxIdle" value="5"/>
+                <property name="poolingProfileLabel" value=""/>
+                <property name="maxWait" value="5"/>
+                <property name="evictionCheckIntervalMillis" value="-1"/>
+                <property name="isProcessed$$$$" value="true"/>
+                <property name="minEvictionMillis" value="1800000"/>
+                <property name="initialisationPolicy" value="INITIALISE_ONE"/>
+            </property-collection>
+        </properties>
+        <description></description>
+    </global-element>
+    <flow SubFlow="false" name="main" entity-id="5bf6d018-9169-460f-8c56-4e6068cde0e0">
         <properties>
             <property name="processingStrategy"/>
             <property name="processingStrategy2"/>
             <property name="initialState"/>
             <property name="bussinessEventsLabel"/>
-            <property name="auxiliary;index" value="27"/>
+            <property name="auxiliary;index" value="29"/>
             <property name="tracking:enable-default-events"/>
         </properties>
         <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#1">
@@ -157,7 +429,7 @@
                     <property name="responseTransformer-refs"/>
                     <property name="method"/>
                     <property name="user"/>
-                    <property name="auxiliary;index" value="28"/>
+                    <property name="auxiliary;index" value="30"/>
                     <property name="responseTimeout"/>
                     <property name="mimeType"/>
                     <property name="connector-ref"/>
@@ -167,24 +439,24 @@
                 <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
                     <property name="config-ref" value="apiConfig"/>
-                    <property name="auxiliary;index" value="29"/>
+                    <property name="auxiliary;index" value="31"/>
                 </properties>
             </pattern>
             <pattern name="Reference Exception Strategy" type="http://www.mulesoft.org/schema/mule/core/exception-strategy" entity-id="Reference Exception Strategy#1">
                 <properties>
                     <property name="ref" value="apiKitGlobalExceptionMapping"/>
-                    <property name="auxiliary;index" value="30"/>
+                    <property name="auxiliary;index" value="32"/>
                 </properties>
             </pattern>
         </lane>
     </flow>
-    <flow SubFlow="false" name="get:/packages:apiConfig" entity-id="b551b8f3-fd37-485e-a635-ae5d79bceb1a">
+    <flow SubFlow="false" name="get:/packages:apiConfig" entity-id="1288b8e3-f161-4f26-8a84-e88dda9ca572">
         <properties>
             <property name="processingStrategy"/>
             <property name="processingStrategy2"/>
             <property name="initialState"/>
             <property name="bussinessEventsLabel"/>
-            <property name="auxiliary;index" value="31"/>
+            <property name="auxiliary;index" value="33"/>
             <property name="tracking:enable-default-events"/>
         </properties>
         <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#2">
@@ -195,55 +467,100 @@
                     <property name="propertyName" value="Content-Type"/>
                     <property name="value" value="application/json"/>
                     <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/core/set-property"/>
-                    <property name="auxiliary;index" value="32"/>
+                    <property name="auxiliary;index" value="34"/>
                 </properties>
             </pattern>
             <pattern name="Expression" type="http://www.mulesoft.org/schema/mule/core/expression-component" entity-id="Expression#1">
                 <graphicalData x="153" y="346" width="88" height="71"/>
                 <properties>
-                    <property name="expression" value="app.registry['startYear'] = message.inboundProperties.startDate.substring(0, 4);&#xA;app.registry['startMonth'] = message.inboundProperties.startDate.substring(5, 7);&#xA;app.registry['startDay'] = message.inboundProperties.startDate.substring(8, 10);&#xA;app.registry['returnYear'] = message.inboundProperties.returnDate.substring(0, 4);&#xA;app.registry['returnMonth'] = message.inboundProperties.returnDate.substring(5, 7);&#xA;app.registry['returnDay'] = message.inboundProperties.returnDate.substring(8, 10);"/>
+                    <property name="expression" value="flowVars['startYear'] = message.inboundProperties.startDate.substring(0, 4);&#xA;flowVars['startMonth'] = message.inboundProperties.startDate.substring(5, 7);&#xA;flowVars['startDay'] = message.inboundProperties.startDate.substring(8, 10);&#xA;flowVars['returnYear'] = message.inboundProperties.returnDate.substring(0, 4);&#xA;flowVars['returnMonth'] = message.inboundProperties.returnDate.substring(5, 7);&#xA;flowVars['returnDay'] = message.inboundProperties.returnDate.substring(8, 10);"/>
                     <property name="file"/>
                     <property name="evaluator"/>
-                    <property name="auxiliary;index" value="33"/>
+                    <property name="auxiliary;index" value="35"/>
                 </properties>
-                <description></description>
             </pattern>
             <pattern name="Expedia" type="http://www.mulesoft.org/schema/mule/expediaconnector/expediaconnector-connector" entity-id="Expedia#2">
                 <graphicalData x="301" y="346" width="68" height="71"/>
                 <properties>
                     <property name=""/>
                     <property name="currencyCode" value="USD"/>
-                    <property name="departureDate" value="#[app.registry['returnMonth'] +&quot;/&quot;+app.registry['returnDay']+&quot;/&quot;+app.registry['returnYear']]"/>
+                    <property name="departureDate" value="#[flowVars['returnMonth'] +&quot;/&quot;+flowVars['returnDay']+&quot;/&quot;+flowVars['returnYear']]"/>
                     <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/expediaconnector/get-hotel-data"/>
                     <property name="countryCode" value="#[message.inboundProperties.destCountry.trim()]"/>
                     <property name="password"/>
                     <property name="apiKey" value="phr23ratvzk3cmyxwv5a8ft4"/>
                     <property name="city" value="#[message.inboundProperties.destCity.trim()]"/>
+                    <property name="_type" value="json"/>
                     <property name="username"/>
                     <property name="numberOfResults" value="3"/>
                     <property name="room1" value="#[message.inboundProperties.numPers.trim()]"/>
-                    <property name="arrivalDate" value="#[app.registry['startMonth'] +&quot;/&quot;+app.registry['startDay']+&quot;/&quot;+app.registry['startYear']]"/>
+                    <property name="arrivalDate" value="#[flowVars['startMonth'] +&quot;/&quot;+flowVars['startDay']+&quot;/&quot;+flowVars['startYear']]"/>
                     <property name="config-ref" value="Expedia"/>
-                    <property name="auxiliary;index" value="34"/>
+                    <property name="auxiliary;index" value="36"/>
                 </properties>
-                <description></description>
             </pattern>
-            <pattern name="Tiket" type="http://www.mulesoft.org/schema/mule/tiket/tiket-connector" entity-id="03ff7c0f-0291-4525-b2c7-26c330bdec99">
-                <graphicalData x="429" y="346" width="68" height="71"/>
+            <pattern name="Variable" type="http://www.mulesoft.org/schema/mule/core/variable-transformer" entity-id="Variable#1">
+                <graphicalData x="429" y="346" width="71" height="71"/>
                 <properties>
-                    <property name="" value=""/>
-                    <property name="username" value=""/>
-                    <property name="updated"/>
+                    <property name="variableName" value="arrivalAirport"/>
+                    <property name="value" value="#[json:HotelListResponse/HotelList/HotelSummary[0]/airportCode]"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/core/set-variable"/>
+                    <property name="auxiliary;index" value="37"/>
+                </properties>
+            </pattern>
+            <pattern name="Variable" type="http://www.mulesoft.org/schema/mule/core/variable-transformer" entity-id="Variable#2">
+                <graphicalData x="560" y="346" width="71" height="71"/>
+                <properties>
+                    <property name="variableName" value="hotelData"/>
+                    <property name="value" value="#[payload]"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/core/set-variable"/>
+                    <property name="auxiliary;index" value="38"/>
+                </properties>
+            </pattern>
+            <pattern name="Tiket" type="http://www.mulesoft.org/schema/mule/tiket/tiket-connector" entity-id="Tiket#2">
+                <graphicalData x="691" y="346" width="68" height="71"/>
+                <properties>
+                    <property name=""/>
+                    <property name="username"/>
                     <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/tiket/get-token"/>
                     <property name="outputtoken" value="xml"/>
-                    <property name="password" value=""/>
+                    <property name="password"/>
                     <property name="config-ref" value="Tiket"/>
+                    <property name="auxiliary;index" value="39"/>
                     <property name="secretkey" value="7ffa9007da5aeeaaa88e8ad8079b8f33"/>
                 </properties>
                 <description></description>
             </pattern>
-            <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="119dc863-62bd-4ed6-b8bf-3ab6589b0c85">
-                <graphicalData x="557" y="346" width="68" height="71"/>
+            <pattern name="Variable" type="http://www.mulesoft.org/schema/mule/core/variable-transformer" entity-id="Variable#3">
+                <graphicalData x="819" y="346" width="71" height="71"/>
+                <properties>
+                    <property name="variableName" value="tiketToken"/>
+                    <property name="value" value="#[xpath('tiket/token/text()').text]"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/core/set-variable"/>
+                    <property name="auxiliary;index" value="40"/>
+                </properties>
+            </pattern>
+            <pattern name="Tiket" type="http://www.mulesoft.org/schema/mule/tiket/tiket-connector" entity-id="Tiket#3">
+                <graphicalData x="950" y="346" width="68" height="71"/>
+                <properties>
+                    <property name="" value=""/>
+                    <property name="outputsf" value="xml"/>
+                    <property name="d" value="#[message.inboundProperties.departureAirport.trim()]"/>
+                    <property name="username" value=""/>
+                    <property name="updated"/>
+                    <property name="token" value="#[flowVars['tiketToken']]"/>
+                    <property name="a" value="#[flowVars['arrivalAirport']]"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/tiket/search-flights"/>
+                    <property name="adult" value="#[message.inboundProperties.numPers.trim()]"/>
+                    <property name="date" value="#[message.inboundProperties.startDate.trim()]"/>
+                    <property name="password" value=""/>
+                    <property name="config-ref" value="Tiket"/>
+                    <property name="auxiliary;index" value="41"/>
+                </properties>
+                <description></description>
+            </pattern>
+            <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="53ea401d-b77d-4a78-9e2c-4890447b879e">
+                <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
                     <property name="message" value="#[payload]"/>
                     <property name="category" value=""/>
@@ -252,54 +569,111 @@
                 </properties>
                 <description></description>
             </pattern>
-            <pattern name="Variable" type="http://www.mulesoft.org/schema/mule/core/variable-transformer" entity-id="2c8b303e-a276-4092-a80c-266c76fdaec9">
-                <graphicalData x="813" y="346" width="71" height="71"/>
+            <pattern name="Expression" type="http://www.mulesoft.org/schema/mule/core/expression-component" entity-id="Expression#2">
+                <graphicalData x="1078" y="346" width="88" height="71"/>
                 <properties>
-                    <property name="auxiliary;moved-from"/>
-                    <property name="updated"/>
-                    <property name="variableName" value="hotelData"/>
-                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/core/set-variable"/>
-                    <property name="value" value="#[payload]"/>
+                    <property name="expression" value="flowVars['flightData'] = payload;&#xA;payload = flowVars['hotelData'];"/>
+                    <property name="file"/>
+                    <property name="evaluator"/>
+                    <property name="auxiliary;index" value="42"/>
                 </properties>
                 <description></description>
             </pattern>
-            <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="4cdd385c-8daa-44d0-92a9-4d1316d18011">
-                <graphicalData x="0" y="0" width="0" height="0"/>
+            <pattern name="Variable" type="http://www.mulesoft.org/schema/mule/core/variable-transformer" entity-id="Variable#4">
+                <graphicalData x="1226" y="346" width="71" height="71"/>
                 <properties>
-                    <property name="message" value="#[xpath('/tiket/token/text()', flowVars['hotelData']).text]"/>
-                    <property name="category" value=""/>
-                    <property name="level" value="INFO"/>
-                    <property name="updated"/>
+                    <property name="variableName" value="response"/>
+                    <property name="value" value="{#[&quot;\n&quot;]#[&quot;\t&quot;]&quot;packages&quot;: [  #[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;package&quot;:{ #[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;startDate&quot;:&quot;#[message.inboundProperties.startDate.trim()]&quot;,#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;returnDate&quot;:&quot;#[message.inboundProperties.returnDate.trim()]&quot;,#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;destCountry&quot;:&quot;#[message.inboundProperties.destCountry.trim()]&quot;,#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;destCity&quot;:&quot;#[message.inboundProperties.destCity.trim()]&quot;,#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;departureAirport&quot;:&quot;#[message.inboundProperties.departureAirport.trim()]&quot;,#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;numPers&quot;:&quot;#[message.inboundProperties.numPers.trim()]&quot;,#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;airline&quot;:&quot;#[xpath('//result[1]/airlines_name/text()', flowVars['flightData']).text]&quot;,#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;flightPrice&quot;:&quot;#[xpath('//result[1]/price_value/text()', flowVars['flightData']).text]&quot;,#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;flightId&quot;:&quot;#[xpath('//result[1]/flight_id/text()', flowVars['flightData']).text]&quot;, "/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/core/set-variable"/>
+                    <property name="auxiliary;index" value="43"/>
                 </properties>
                 <description></description>
             </pattern>
             <pattern name="Set Payload" type="http://www.mulesoft.org/schema/mule/core/set-payload" entity-id="Set Payload#1">
-                <graphicalData x="944" y="346" width="93" height="71"/>
+                <graphicalData x="1357" y="346" width="93" height="71"/>
                 <properties>
-                    <property name="auxiliary;moved-from"/>
-                    <property name="value" value="{&quot;hotels&quot;:[{&quot;hotel&quot;:&quot;#[json:HotelListResponse/HotelList/HotelSummary[0]/name]&quot;, &quot;hotelPrice&quot;:&quot;#[json:HotelListResponse/HotelList/HotelSummary[0]/RoomRateDetailsList/RoomRateDetails/RateInfo/ChargeableRateInfo/@total]&quot;, &quot;hotelId&quot;:&quot;#[json:HotelListResponse/HotelList/HotelSummary[0]/hotelId]&quot;},{&quot;hotel&quot;:&quot;#[json:HotelListResponse/HotelList/HotelSummary[1]/name]&quot;, &quot;hotelPrice&quot;:&quot;#[json:HotelListResponse/HotelList/HotelSummary[1]/RoomRateDetailsList/RoomRateDetails/RateInfo/ChargeableRateInfo/@total]&quot;, &quot;hotelId&quot;:&quot;#[json:HotelListResponse/HotelList/HotelSummary[1]/hotelId]&quot;},{&quot;hotel&quot;:&quot;#[json:HotelListResponse/HotelList/HotelSummary[2]/name]&quot;, &quot;hotelPrice&quot;:&quot;#[json:HotelListResponse/HotelList/HotelSummary[2]/RoomRateDetailsList/RoomRateDetails/RateInfo/ChargeableRateInfo/@total]&quot;, &quot;hotelId&quot;:&quot;#[json:HotelListResponse/HotelList/HotelSummary[2]/hotelId]&quot;}]}"/>
+                    <property name="value" value="#[flowVars['hotelData']]"/>
+                    <property name="auxiliary;index" value="44"/>
                 </properties>
                 <description></description>
             </pattern>
+            <pattern name="Variable" type="http://www.mulesoft.org/schema/mule/core/variable-transformer" entity-id="Variable#5">
+                <graphicalData x="1510" y="346" width="71" height="71"/>
+                <properties>
+                    <property name="variableName" value="response"/>
+                    <property name="value" value="#[flowVars['response']]#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;hotel&quot;:&quot;#[json:HotelListResponse/HotelList/HotelSummary[0]/name]&quot;,#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;hotelId&quot;:&quot;#[json:HotelListResponse/HotelList/HotelSummary[0]/hotelId]&quot;, #[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;hotelPrice&quot;:&quot;#[json:HotelListResponse/HotelList/HotelSummary[0]/RoomRateDetailsList/RoomRateDetails/RateInfo/ChargeableRateInfo/@total]&quot;#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]},"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/core/set-variable"/>
+                    <property name="auxiliary;index" value="45"/>
+                </properties>
+            </pattern>
+            <pattern name="Variable" type="http://www.mulesoft.org/schema/mule/core/variable-transformer" entity-id="Variable#6">
+                <graphicalData x="1641" y="346" width="71" height="71"/>
+                <properties>
+                    <property name="variableName" value="response"/>
+                    <property name="value" value="#[flowVars['response']]#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;package&quot;:{ #[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;startDate&quot;:&quot;#[message.inboundProperties.startDate.trim()]&quot;,#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;returnDate&quot;:&quot;#[message.inboundProperties.returnDate.trim()]&quot;,#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;destCountry&quot;:&quot;#[message.inboundProperties.destCountry.trim()]&quot;,#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;destCity&quot;:&quot;#[message.inboundProperties.destCity.trim()]&quot;,#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;departureAirport&quot;:&quot;#[message.inboundProperties.departureAirport.trim()]&quot;,#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;numPers&quot;:&quot;#[message.inboundProperties.numPers.trim()]&quot;,#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;airline&quot;:&quot;#[xpath('//result[1]/airlines_name/text()', flowVars['flightData']).text]&quot;,#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;flightPrice&quot;:&quot;#[xpath('//result[1]/price_value/text()', flowVars['flightData']).text]&quot;,#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;flightId&quot;:&quot;#[xpath('//result[1]/flight_id/text()', flowVars['flightData']).text]&quot;, "/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/core/set-variable"/>
+                    <property name="auxiliary;index" value="46"/>
+                </properties>
+            </pattern>
+            <pattern name="Set Payload" type="http://www.mulesoft.org/schema/mule/core/set-payload" entity-id="Set Payload#2">
+                <graphicalData x="1772" y="346" width="93" height="71"/>
+                <properties>
+                    <property name="value" value="#[flowVars['hotelData']]"/>
+                    <property name="auxiliary;index" value="47"/>
+                </properties>
+            </pattern>
+            <pattern name="Variable" type="http://www.mulesoft.org/schema/mule/core/variable-transformer" entity-id="Variable#7">
+                <graphicalData x="1925" y="346" width="71" height="71"/>
+                <properties>
+                    <property name="variableName" value="response"/>
+                    <property name="value" value="#[flowVars['response']]#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;hotel&quot;:&quot;#[json:HotelListResponse/HotelList/HotelSummary[1]/name]&quot;,#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;hotelId&quot;:&quot;#[json:HotelListResponse/HotelList/HotelSummary[1]/hotelId]&quot;, #[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;hotelPrice&quot;:&quot;#[json:HotelListResponse/HotelList/HotelSummary[1]/RoomRateDetailsList/RoomRateDetails/RateInfo/ChargeableRateInfo/@total]&quot;#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]},"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/core/set-variable"/>
+                    <property name="auxiliary;index" value="48"/>
+                </properties>
+            </pattern>
+            <pattern name="Variable" type="http://www.mulesoft.org/schema/mule/core/variable-transformer" entity-id="Variable#8">
+                <graphicalData x="2056" y="346" width="71" height="71"/>
+                <properties>
+                    <property name="variableName" value="response"/>
+                    <property name="value" value="#[flowVars['response']]#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;package&quot;:{ #[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;startDate&quot;:&quot;#[message.inboundProperties.startDate.trim()]&quot;,#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;returnDate&quot;:&quot;#[message.inboundProperties.returnDate.trim()]&quot;,#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;destCountry&quot;:&quot;#[message.inboundProperties.destCountry.trim()]&quot;,#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;destCity&quot;:&quot;#[message.inboundProperties.destCity.trim()]&quot;,#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;departureAirport&quot;:&quot;#[message.inboundProperties.departureAirport.trim()]&quot;,#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;numPers&quot;:&quot;#[message.inboundProperties.numPers.trim()]&quot;,#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;airline&quot;:&quot;#[xpath('//result[1]/airlines_name/text()', flowVars['flightData']).text]&quot;,#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;flightPrice&quot;:&quot;#[xpath('//result[1]/price_value/text()', flowVars['flightData']).text]&quot;,#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;flightId&quot;:&quot;#[xpath('//result[1]/flight_id/text()', flowVars['flightData']).text]&quot;, "/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/core/set-variable"/>
+                    <property name="auxiliary;index" value="49"/>
+                </properties>
+            </pattern>
+            <pattern name="Set Payload" type="http://www.mulesoft.org/schema/mule/core/set-payload" entity-id="Set Payload#3">
+                <graphicalData x="2187" y="346" width="93" height="71"/>
+                <properties>
+                    <property name="value" value="#[flowVars['hotelData']]"/>
+                    <property name="auxiliary;index" value="50"/>
+                </properties>
+            </pattern>
+            <pattern name="Variable" type="http://www.mulesoft.org/schema/mule/core/variable-transformer" entity-id="Variable#9">
+                <graphicalData x="2340" y="346" width="71" height="71"/>
+                <properties>
+                    <property name="variableName" value="response"/>
+                    <property name="value" value="#[flowVars['response']]#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;hotel&quot;:&quot;#[json:HotelListResponse/HotelList/HotelSummary[2]/name]&quot;,#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;hotelId&quot;:&quot;#[json:HotelListResponse/HotelList/HotelSummary[2]/hotelId]&quot;, #[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]&quot;hotelPrice&quot;:&quot;#[json:HotelListResponse/HotelList/HotelSummary[2]/RoomRateDetailsList/RoomRateDetails/RateInfo/ChargeableRateInfo/@total]&quot;#[&quot;\n&quot;]#[&quot;\t&quot;]#[&quot;\t&quot;]} #[&quot;\n&quot;]#[&quot;\t&quot;]] #[&quot;\n&quot;]}"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/core/set-variable"/>
+                    <property name="auxiliary;index" value="51"/>
+                </properties>
+            </pattern>
+            <pattern name="Set Payload" type="http://www.mulesoft.org/schema/mule/core/set-payload" entity-id="Set Payload#4">
+                <graphicalData x="2471" y="346" width="93" height="71"/>
+                <properties>
+                    <property name="value" value="#[flowVars['response']]"/>
+                    <property name="auxiliary;index" value="52"/>
+                </properties>
+            </pattern>
         </lane>
     </flow>
-    <flow SubFlow="false" name="get:/users/{user}:apiConfig" entity-id="03750dcb-2598-41a0-9c62-9ab68e444494">
+    <flow SubFlow="false" name="get:/users/{user}:apiConfig" entity-id="60888e7b-5506-4591-ab63-e459ffca4971">
         <properties>
-            <property name="id" value=""/>
-            <property name="updated"/>
-            <property name="auxiliary;erased;initialState" value="true"/>
-            <property name="initialState" value=""/>
-            <property name="processingStrategy2" value=""/>
-            <property name="bussinessEventsLabel" value=""/>
-            <property name="auxiliary;index" value="37"/>
-            <property name="auxiliary;erased;processingStrategy2" value="true"/>
-            <property name="tracking:enable-default-events" value="false"/>
-            <property-collection name="@http://www.mulesoft.org/schema/mule/ee/tracking/transaction;17944376">
-                <property name="id" value=""/>
-                <property name="isProcessed$$$$" value="true"/>
-            </property-collection>
+            <property name="processingStrategy"/>
+            <property name="processingStrategy2"/>
+            <property name="initialState"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="auxiliary;index" value="53"/>
+            <property name="tracking:enable-default-events"/>
         </properties>
-        <description></description>
         <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#3">
             <graphicalData x="0" y="0" width="0" height="0"/>
             <pattern name="Property" type="http://www.mulesoft.org/schema/mule/core/properties-transformer" entity-id="Property#2">
@@ -308,143 +682,196 @@
                     <property name="propertyName" value="Content-Type"/>
                     <property name="value" value="application/json"/>
                     <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/core/set-property"/>
-                    <property name="auxiliary;index" value="38"/>
-                </properties>
-            </pattern>
-            <pattern name="Set Payload" type="http://www.mulesoft.org/schema/mule/core/set-payload" entity-id="Set Payload#2">
-                <graphicalData x="0" y="0" width="0" height="0"/>
-                <properties>
-                    <property name="value" value="{username:&quot;#[user]&quot;}"/>
-                    <property name="auxiliary;index" value="39"/>
-                </properties>
-            </pattern>
-            <pattern name="Mongo DB" type="http://www.mulesoft.org/schema/mule/mongo/mongo-connector" entity-id="Mongo DB#2">
-                <graphicalData x="0" y="0" width="0" height="0"/>
-                <properties>
-                    <property name=""/>
-                    <property name="username"/>
-                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/mongo/find-one-object"/>
-                    <property name="query-ref"/>
-                    <property name="collection" value="users"/>
-                    <property name="password"/>
-                    <property name="failOnNotFound" value="false"/>
-                    <property name="config-ref" value="Mongo_DB"/>
-                    <property name="auxiliary;index" value="40"/>
-                    <property name="database"/>
-                </properties>
-            </pattern>
-            <pattern name="Mongo DB" type="http://www.mulesoft.org/schema/mule/mongo/mongo-transformer" entity-id="Mongo DB#3">
-                <graphicalData x="0" y="0" width="0" height="0"/>
-                <properties>
-                    <property name="returnClass"/>
-                    <property name="ignoreBadInput"/>
-                    <property name="encoding"/>
-                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/mongo/mongo-collection-to-json"/>
-                    <property name="auxiliary;index" value="41"/>
-                    <property name="mimeType"/>
-                </properties>
-            </pattern>
-            <pattern name="Set Payload" type="http://www.mulesoft.org/schema/mule/core/set-payload" entity-id="Set Payload#3">
-                <graphicalData x="0" y="0" width="0" height="0"/>
-                <properties>
-                    <property name="value" value="{&quot;id&quot;:&quot;#[json:_id/$oid]&quot;,&quot;username&quot;:&quot;#[json:username]&quot;, &quot;city&quot;:&quot;#[json:city]&quot;,&quot;country&quot;:&quot;#[json:country]&quot;}"/>
-                    <property name="auxiliary;index" value="42"/>
-                </properties>
-            </pattern>
-        </lane>
-    </flow>
-    <flow SubFlow="false" name="get:/users/{user}/packages:apiConfig" entity-id="7a08d5a8-c69d-491e-8770-b7fb12d6b0a8">
-        <properties>
-            <property name="processingStrategy"/>
-            <property name="processingStrategy2"/>
-            <property name="initialState"/>
-            <property name="bussinessEventsLabel"/>
-            <property name="auxiliary;index" value="43"/>
-            <property name="tracking:enable-default-events"/>
-        </properties>
-        <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#4">
-            <graphicalData x="0" y="0" width="0" height="0"/>
-            <pattern name="Property" type="http://www.mulesoft.org/schema/mule/core/properties-transformer" entity-id="Property#3">
-                <graphicalData x="0" y="0" width="0" height="0"/>
-                <properties>
-                    <property name="propertyName" value="Content-Type"/>
-                    <property name="value" value="application/json"/>
-                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/core/set-property"/>
-                    <property name="auxiliary;index" value="44"/>
-                </properties>
-            </pattern>
-            <pattern name="Set Payload" type="http://www.mulesoft.org/schema/mule/core/set-payload" entity-id="Set Payload#4">
-                <graphicalData x="0" y="0" width="0" height="0"/>
-                <properties>
-                    <property name="value" value="{username:&quot;#[user]&quot;}"/>
-                    <property name="auxiliary;index" value="45"/>
-                </properties>
-            </pattern>
-            <pattern name="Mongo DB" type="http://www.mulesoft.org/schema/mule/mongo/mongo-connector" entity-id="Mongo DB#4">
-                <graphicalData x="0" y="0" width="0" height="0"/>
-                <properties>
-                    <property name=""/>
-                    <property name="limit"/>
-                    <property name="username"/>
-                    <property name="numToSkip"/>
-                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/mongo/find-objects"/>
-                    <property name="query-ref"/>
-                    <property name="collection" value="packages"/>
-                    <property name="password"/>
-                    <property name="config-ref" value="Mongo_DB"/>
-                    <property name="auxiliary;index" value="46"/>
-                    <property name="database"/>
-                </properties>
-            </pattern>
-            <pattern name="Mongo DB" type="http://www.mulesoft.org/schema/mule/mongo/mongo-transformer" entity-id="Mongo DB#5">
-                <graphicalData x="0" y="0" width="0" height="0"/>
-                <properties>
-                    <property name="returnClass"/>
-                    <property name="ignoreBadInput"/>
-                    <property name="encoding"/>
-                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/mongo/mongo-collection-to-json"/>
-                    <property name="auxiliary;index" value="47"/>
-                    <property name="mimeType"/>
-                </properties>
-            </pattern>
-        </lane>
-    </flow>
-    <flow SubFlow="false" name="get:/users/{user}/packages/{package}:apiConfig" entity-id="138dc6f2-c835-4be8-a302-309f29d839a5">
-        <properties>
-            <property name="processingStrategy"/>
-            <property name="processingStrategy2"/>
-            <property name="initialState"/>
-            <property name="bussinessEventsLabel"/>
-            <property name="auxiliary;index" value="48"/>
-            <property name="tracking:enable-default-events"/>
-        </properties>
-        <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#5">
-            <graphicalData x="0" y="0" width="0" height="0"/>
-            <pattern name="Property" type="http://www.mulesoft.org/schema/mule/core/properties-transformer" entity-id="Property#4">
-                <graphicalData x="0" y="0" width="0" height="0"/>
-                <properties>
-                    <property name="propertyName" value="Content-Type"/>
-                    <property name="value" value="application/json"/>
-                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/core/set-property"/>
-                    <property name="auxiliary;index" value="49"/>
+                    <property name="auxiliary;index" value="54"/>
                 </properties>
             </pattern>
             <pattern name="Set Payload" type="http://www.mulesoft.org/schema/mule/core/set-payload" entity-id="Set Payload#5">
                 <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
-                    <property name="value" value="{&#xA;   &quot;startDate&quot; : &quot;2013-10-22&quot;,&#xA;   &quot;returnDate&quot; : &quot;2013-10-29&quot;,&#xA;   &quot;destCountry&quot; : &quot;France&quot;,&#xA;   &quot;destCity&quot; : &quot;Paris&quot;,&#xA;   &quot;departureAirport&quot; : &quot;EZE&quot;,&#xA;   &quot;hotel&quot; : &quot;Hotel Keppler&quot;,&#xA;   &quot;numPers&quot; : 2,&#xA;   &quot;airline&quot; : &quot;Air France&quot;,&#xA;   &quot;hotelPrice&quot; : &quot;2000&quot;,&#xA;   &quot;flightPrice&quot; : &quot;3000&quot;,&#xA;   &quot;totalPrice&quot; : &quot;5000&quot;,&#xA;   &quot;hotelId&quot; : &quot;2250&quot;,&#xA;   &quot;flightId&quot; : &quot;6682&quot;&#xA; }"/>
-                    <property name="auxiliary;index" value="50"/>
+                    <property name="value" value="{username:&quot;#[user]&quot;}"/>
+                    <property name="auxiliary;index" value="55"/>
                 </properties>
+                <description></description>
+            </pattern>
+            <pattern name="Mongo DB" type="http://www.mulesoft.org/schema/mule/mongo/mongo-connector" entity-id="Mongo DB#2">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="" value=""/>
+                    <property name="username" value=""/>
+                    <property name="updated"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/mongo/find-one-object"/>
+                    <property name="query-ref" value=""/>
+                    <property name="collection" value="users"/>
+                    <property name="config-ref" value="Mongo_DB"/>
+                    <property name="failOnNotFound" value="true"/>
+                    <property name="password" value=""/>
+                    <property name="auxiliary;index" value="56"/>
+                    <property name="database" value=""/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/mongo/find-one-object-fieldss;1">
+                        <property name="isProcessed$$$$" value="true"/>
+                    </property-collection>
+                </properties>
+                <description></description>
+            </pattern>
+            <pattern name="Mongo DB" type="http://www.mulesoft.org/schema/mule/mongo/mongo-transformer" entity-id="Mongo DB#3">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="auxiliary;erased;mimeType" value="true"/>
+                    <property name="returnClass" value=""/>
+                    <property name="ignoreBadInput" value="false"/>
+                    <property name="updated"/>
+                    <property name="auxiliary;erased;encoding" value="true"/>
+                    <property name="encoding" value=""/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/mongo/dbobject-to-json"/>
+                    <property name="mimeType" value=""/>
+                    <property name="auxiliary;index" value="57"/>
+                </properties>
+                <description></description>
+            </pattern>
+            <pattern name="Set Payload" type="http://www.mulesoft.org/schema/mule/core/set-payload" entity-id="Set Payload#6">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="value" value="{&quot;id&quot;:&quot;#[json:_id/$oid]&quot;,&quot;username&quot;:&quot;#[json:username]&quot;, &quot;city&quot;:&quot;#[json:city]&quot;,&quot;country&quot;:&quot;#[json:country]&quot;}"/>
+                    <property name="auxiliary;index" value="58"/>
+                </properties>
+                <description></description>
             </pattern>
         </lane>
     </flow>
-    <flow SubFlow="false" name="post:/users:apiConfig" entity-id="1e013040-18d7-421a-b8d4-3e6560879626">
+    <flow SubFlow="false" name="get:/users/{user}/packages:apiConfig" entity-id="a86de308-c380-4aec-b92b-d36710b70b15">
         <properties>
             <property name="processingStrategy"/>
             <property name="processingStrategy2"/>
             <property name="initialState"/>
             <property name="bussinessEventsLabel"/>
-            <property name="auxiliary;index" value="51"/>
+            <property name="auxiliary;index" value="59"/>
+            <property name="tracking:enable-default-events"/>
+        </properties>
+        <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#4">
+            <graphicalData x="0" y="0" width="0" height="0"/>
+            <pattern name="Property" type="http://www.mulesoft.org/schema/mule/core/properties-transformer" entity-id="Property#3">
+                <graphicalData x="19" y="656" width="74" height="71"/>
+                <properties>
+                    <property name="propertyName" value="Content-Type"/>
+                    <property name="value" value="application/json"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/core/set-property"/>
+                    <property name="auxiliary;index" value="60"/>
+                </properties>
+            </pattern>
+            <pattern name="Set Payload" type="http://www.mulesoft.org/schema/mule/core/set-payload" entity-id="Set Payload#7">
+                <graphicalData x="153" y="656" width="93" height="71"/>
+                <properties>
+                    <property name="updated"/>
+                    <property name="value" value="{user:&quot;#[user]&quot;}"/>
+                    <property name="auxiliary;index" value="61"/>
+                </properties>
+                <description></description>
+            </pattern>
+            <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="eed0fdfc-1e5a-4558-b124-4d320b325c76">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="message" value="#[payload]"/>
+                    <property name="category" value=""/>
+                    <property name="level" value="INFO"/>
+                    <property name="updated"/>
+                </properties>
+                <description></description>
+            </pattern>
+            <pattern name="Mongo DB" type="http://www.mulesoft.org/schema/mule/mongo/mongo-connector" entity-id="Mongo DB#4">
+                <graphicalData x="306" y="656" width="83" height="71"/>
+                <properties>
+                    <property name="" value=""/>
+                    <property name="limit" value=""/>
+                    <property name="auxiliary;erased;numToSkip" value="true"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/mongo/find-objects"/>
+                    <property name="query-ref" value=""/>
+                    <property name="collection" value="packages"/>
+                    <property name="password" value=""/>
+                    <property name="database" value=""/>
+                    <property name="auxiliary;erased;limit" value="true"/>
+                    <property name="username" value=""/>
+                    <property name="updated"/>
+                    <property name="numToSkip" value=""/>
+                    <property name="config-ref" value="Mongo_DB3"/>
+                    <property name="auxiliary;index" value="62"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/mongo/find-objects-fieldss;1">
+                        <property name="isProcessed$$$$" value="true"/>
+                    </property-collection>
+                </properties>
+                <description></description>
+            </pattern>
+            <pattern name="Mongo DB" type="http://www.mulesoft.org/schema/mule/mongo/mongo-transformer" entity-id="Mongo DB#5">
+                <graphicalData x="449" y="656" width="83" height="71"/>
+                <properties>
+                    <property name="returnClass"/>
+                    <property name="ignoreBadInput"/>
+                    <property name="encoding"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/mongo/mongo-collection-to-json"/>
+                    <property name="auxiliary;index" value="63"/>
+                    <property name="mimeType"/>
+                </properties>
+                <description></description>
+            </pattern>
+        </lane>
+    </flow>
+    <flow SubFlow="false" name="get:/users/{user}/packages/{package}:apiConfig" entity-id="bb65e083-c8d0-45a4-9cfa-d2ec2a44ea41">
+        <properties>
+            <property name="processingStrategy"/>
+            <property name="processingStrategy2"/>
+            <property name="initialState"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="auxiliary;index" value="64"/>
+            <property name="tracking:enable-default-events"/>
+        </properties>
+        <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#5">
+            <graphicalData x="0" y="0" width="0" height="0"/>
+            <pattern name="Property" type="http://www.mulesoft.org/schema/mule/core/properties-transformer" entity-id="Property#4">
+                <graphicalData x="19" y="811" width="74" height="71"/>
+                <properties>
+                    <property name="propertyName" value="Content-Type"/>
+                    <property name="value" value="application/json"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/core/set-property"/>
+                    <property name="auxiliary;index" value="65"/>
+                </properties>
+            </pattern>
+            <pattern name="Set Payload" type="http://www.mulesoft.org/schema/mule/core/set-payload" entity-id="1facd2ce-c410-40f5-aafe-7ee1e34ec8e4">
+                <graphicalData x="153" y="811" width="93" height="71"/>
+                <properties>
+                    <property name="updated"/>
+                    <property name="value" value="{'_id.$oid':'#[package]'}"/>
+                </properties>
+                <description></description>
+            </pattern>
+            <pattern name="Mongo DB" type="http://www.mulesoft.org/schema/mule/mongo/mongo-connector" entity-id="95c94618-ead9-4042-a520-8c40fd005f22">
+                <graphicalData x="306" y="811" width="83" height="71"/>
+                <properties>
+                    <property name="limit" value=""/>
+                    <property name="" value=""/>
+                    <property name="auxiliary;erased;limit" value="true"/>
+                    <property name="username" value=""/>
+                    <property name="updated"/>
+                    <property name="auxiliary;erased;numToSkip" value="true"/>
+                    <property name="numToSkip" value=""/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/mongo/find-objects-using-query-map"/>
+                    <property name="collection" value="packages"/>
+                    <property name="config-ref" value="Mongo_DB"/>
+                    <property name="password" value=""/>
+                    <property name="database" value="test"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/mongo/find-objects-using-query-map-fieldss;1">
+                        <property name="isProcessed$$$$" value="true"/>
+                    </property-collection>
+                </properties>
+                <description></description>
+            </pattern>
+        </lane>
+    </flow>
+    <flow SubFlow="false" name="post:/users:apiConfig" entity-id="60631684-718c-4706-8050-ad3ef55df5d4">
+        <properties>
+            <property name="processingStrategy"/>
+            <property name="processingStrategy2"/>
+            <property name="initialState"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="auxiliary;index" value="67"/>
             <property name="tracking:enable-default-events"/>
         </properties>
         <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#6">
@@ -455,33 +882,35 @@
                     <property name="propertyName" value="Content-Type"/>
                     <property name="value" value="application/json"/>
                     <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/core/set-property"/>
-                    <property name="auxiliary;index" value="52"/>
+                    <property name="auxiliary;index" value="68"/>
                 </properties>
             </pattern>
             <pattern name="Mongo DB" type="http://www.mulesoft.org/schema/mule/mongo/mongo-connector" entity-id="Mongo DB#6">
                 <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
-                    <property name=""/>
-                    <property name="username"/>
-                    <property name="writeConcern"/>
+                    <property name="" value=""/>
+                    <property name="username" value=""/>
+                    <property name="updated"/>
+                    <property name="writeConcern" value="DATABASE_DEFAULT"/>
                     <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/mongo/save-object"/>
-                    <property name="element-ref"/>
-                    <property name="collection" value="packages"/>
-                    <property name="password"/>
+                    <property name="element-ref" value=""/>
+                    <property name="collection" value="users"/>
+                    <property name="password" value=""/>
                     <property name="config-ref" value="Mongo_DB"/>
-                    <property name="auxiliary;index" value="53"/>
-                    <property name="database"/>
+                    <property name="database" value=""/>
+                    <property name="auxiliary;index" value="69"/>
                 </properties>
+                <description></description>
             </pattern>
         </lane>
     </flow>
-    <flow SubFlow="false" name="post:/users/{user}/packages:apiConfig" entity-id="24f7cea9-76de-4630-b572-1ae3a4ddd548">
+    <flow SubFlow="false" name="post:/users/{user}/packages:apiConfig" entity-id="81e73d00-1f50-4f8d-9178-2fc4e09fbfd5">
         <properties>
             <property name="processingStrategy"/>
             <property name="processingStrategy2"/>
             <property name="initialState"/>
             <property name="bussinessEventsLabel"/>
-            <property name="auxiliary;index" value="54"/>
+            <property name="auxiliary;index" value="70"/>
             <property name="tracking:enable-default-events"/>
         </properties>
         <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#7">
@@ -492,32 +921,34 @@
                     <property name="propertyName" value="Content-Type"/>
                     <property name="value" value="application/json"/>
                     <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/core/set-property"/>
-                    <property name="auxiliary;index" value="55"/>
+                    <property name="auxiliary;index" value="71"/>
                 </properties>
             </pattern>
-            <pattern name="Set Payload" type="http://www.mulesoft.org/schema/mule/core/set-payload" entity-id="Set Payload#6">
+            <pattern name="Set Payload" type="http://www.mulesoft.org/schema/mule/core/set-payload" entity-id="Set Payload#9">
                 <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
                     <property name="value" value="{&quot;startDate&quot;:&quot;#[json:startDate]&quot;, &quot;returnDate&quot;:&quot;#[json:returnDate]&quot;, &quot;destCountry&quot;:&quot;#[json:destCountry]&quot;, &quot;destCity&quot;:&quot;#[json:destCity]&quot;, &quot;departureAirport&quot;:&quot;#[json:departureAirport]&quot;,  &quot;hotelId&quot;:&quot;#[json:hotelId]&quot;, &quot;flightId&quot;:&quot;#[json:flightId]&quot;, &quot;user&quot;:&quot;#[user]&quot; }"/>
-                    <property name="auxiliary;index" value="56"/>
+                    <property name="auxiliary;index" value="72"/>
                 </properties>
+                <description></description>
             </pattern>
             <pattern name="Mongo DB" type="http://www.mulesoft.org/schema/mule/mongo/mongo-connector" entity-id="Mongo DB#7">
                 <graphicalData x="0" y="0" width="0" height="0"/>
                 <properties>
-                    <property name=""/>
-                    <property name="username"/>
-                    <property name="writeConcern"/>
+                    <property name="" value=""/>
+                    <property name="username" value=""/>
+                    <property name="updated"/>
+                    <property name="writeConcern" value="DATABASE_DEFAULT"/>
                     <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/mongo/save-object"/>
-                    <property name="element-ref"/>
+                    <property name="element-ref" value=""/>
                     <property name="collection" value="packages"/>
-                    <property name="password"/>
+                    <property name="password" value=""/>
                     <property name="config-ref" value="Mongo_DB"/>
-                    <property name="auxiliary;index" value="57"/>
-                    <property name="database"/>
+                    <property name="database" value=""/>
+                    <property name="auxiliary;index" value="73"/>
                 </properties>
+                <description></description>
             </pattern>
         </lane>
     </flow>
-    <description></description>
 </mule-configuration>

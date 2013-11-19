@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
  * A <code>ExpediaConnectorConnectorLifecycleAdapter</code> is a wrapper around {@link ExpediaConnectorConnector } that adds lifecycle methods to the pojo.
  * 
  */
-@Generated(value = "Mule DevKit Version 3.4.0", date = "2013-11-13T05:00:27-03:00", comments = "Build 3.4.0.1555.8df15c1")
+@Generated(value = "Mule DevKit Version 3.4.0", date = "2013-11-19T04:02:39-03:00", comments = "Build 3.4.0.1555.8df15c1")
 public abstract class ExpediaConnectorConnectorLifecycleAdapter
     extends ExpediaConnectorConnectorMetadataAdapater
     implements Disposable, Initialisable, Startable, Stoppable

@@ -2,7 +2,7 @@
 <?artifactRepository version='1.1.0'?>
 <repository name='file:/home/santirami/MuleStudio/workspace/tiket-connector/target/update-site/ - artifacts' type='org.eclipse.equinox.p2.artifact.repository.simpleRepository' version='1'>
   <properties size='2'>
-    <property name='p2.timestamp' value='1384582119431'/>
+    <property name='p2.timestamp' value='1384887942746'/>
     <property name='p2.compressed' value='false'/>
   </properties>
   <mappings size='3'>
@@ -11,18 +11,18 @@
     <rule filter='(&amp; (classifier=org.eclipse.update.feature))' output='${repoUrl}/features/${id}_${version}.jar'/>
   </mappings>
   <artifacts size='2'>
-    <artifact classifier='osgi.bundle' id='org.mule.tooling.ui.contribution.tiket' version='1.0.0.201311160308'>
+    <artifact classifier='osgi.bundle' id='org.mule.tooling.ui.contribution.tiket' version='1.0.0.201311191605'>
       <properties size='3'>
-        <property name='artifact.size' value='166250'/>
-        <property name='download.size' value='166250'/>
-        <property name='download.md5' value='9d10486eb5bf00d13e125e31f413d26a'/>
+        <property name='artifact.size' value='166128'/>
+        <property name='download.size' value='166128'/>
+        <property name='download.md5' value='5c6e6ad6aa09e54e145dac6f3992ebc0'/>
       </properties>
     </artifact>
-    <artifact classifier='org.eclipse.update.feature' id='org.mule.tooling.ui.extension.tiket-connector' version='1.0.0.201311160308'>
+    <artifact classifier='org.eclipse.update.feature' id='org.mule.tooling.ui.extension.tiket-connector' version='1.0.0.201311191605'>
       <properties size='4'>
         <property name='artifact.size' value='3954'/>
         <property name='download.size' value='3954'/>
-        <property name='download.md5' value='8abe5b9326b7dfa8f8699fd0b11d40bf'/>
+        <property name='download.md5' value='09aae718d6a095a171e43fa2799cdb67'/>
         <property name='download.contentType' value='application/zip'/>
       </properties>
     </artifact>

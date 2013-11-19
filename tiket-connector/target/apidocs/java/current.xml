@@ -147,7 +147,7 @@
 </parameter>
 <parameter name="date" type="java.lang.String">
 </parameter>
-<parameter name="adults" type="java.lang.String">
+<parameter name="adult" type="java.lang.String">
 </parameter>
 <parameter name="outputsf" type="java.lang.String">
 </parameter>
@@ -619,7 +619,7 @@
 </parameter>
 <parameter name="date" type="java.lang.String">
 </parameter>
-<parameter name="adults" type="java.lang.String">
+<parameter name="adult" type="java.lang.String">
 </parameter>
 <parameter name="outputsf" type="java.lang.String">
 </parameter>
@@ -5295,7 +5295,7 @@
 <parameter name="value" type="java.lang.Object">
 </parameter>
 </method>
-<method name="setAdults"
+<method name="setAdult"
  return="void"
  abstract="false"
  native="false"
@@ -5396,7 +5396,7 @@
  visibility="protected"
 >
 </field>
-<field name="_adultsType"
+<field name="_adultType"
  type="java.lang.String"
  transient="false"
  volatile="false"
@@ -5456,7 +5456,7 @@
  visibility="protected"
 >
 </field>
-<field name="adults"
+<field name="adult"
  type="java.lang.Object"
  transient="false"
  volatile="false"

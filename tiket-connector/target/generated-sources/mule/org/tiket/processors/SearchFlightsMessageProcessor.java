@@ -26,7 +26,7 @@ import org.tiket.process.ProcessTemplate;
  * SearchFlightsMessageProcessor invokes the {@link org.tiket.TiketConnector#searchFlights(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)} method in {@link TiketConnector }. For each argument there is a field in this processor to match it.  Before invoking the actual method the processor will evaluate and transform where possible to the expected argument type.
  * 
  */
-@Generated(value = "Mule DevKit Version 3.4.0", date = "2013-11-16T03:08:13-03:00", comments = "Build 3.4.0.1555.8df15c1")
+@Generated(value = "Mule DevKit Version 3.4.0", date = "2013-11-19T04:05:26-03:00", comments = "Build 3.4.0.1555.8df15c1")
 public class SearchFlightsMessageProcessor
     extends AbstractMessageProcessor<Object>
     implements Disposable, Initialisable, Startable, Stoppable, MessageProcessor
@@ -40,8 +40,8 @@ public class SearchFlightsMessageProcessor
     protected String _aType;
     protected Object date;
     protected String _dateType;
-    protected Object adults;
-    protected String _adultsType;
+    protected Object adult;
+    protected String _adultType;
     protected Object outputsf;
     protected String _outputsfType;
 
@@ -123,12 +123,12 @@ public class SearchFlightsMessageProcessor
     }
 
     /**
-     * Sets adults
+     * Sets adult
      * 
      * @param value Value to set
      */
-    public void setAdults(Object value) {
-        this.adults = value;
+    public void setAdult(Object value) {
+        this.adult = value;
     }
 
     /**
@@ -156,7 +156,7 @@ public class SearchFlightsMessageProcessor
             final String _transformedD = ((String) evaluateAndTransform(getMuleContext(), event, SearchFlightsMessageProcessor.class.getDeclaredField("_dType").getGenericType(), null, d));
             final String _transformedA = ((String) evaluateAndTransform(getMuleContext(), event, SearchFlightsMessageProcessor.class.getDeclaredField("_aType").getGenericType(), null, a));
             final String _transformedDate = ((String) evaluateAndTransform(getMuleContext(), event, SearchFlightsMessageProcessor.class.getDeclaredField("_dateType").getGenericType(), null, date));
-            final String _transformedAdults = ((String) evaluateAndTransform(getMuleContext(), event, SearchFlightsMessageProcessor.class.getDeclaredField("_adultsType").getGenericType(), null, adults));
+            final String _transformedAdult = ((String) evaluateAndTransform(getMuleContext(), event, SearchFlightsMessageProcessor.class.getDeclaredField("_adultType").getGenericType(), null, adult));
             final String _transformedOutputsf = ((String) evaluateAndTransform(getMuleContext(), event, SearchFlightsMessageProcessor.class.getDeclaredField("_outputsfType").getGenericType(), null, outputsf));
             Object resultPayload;
             ProcessTemplate<Object, Object> processTemplate = ((ProcessAdapter<Object> ) moduleObject).getProcessTemplate();
@@ -174,7 +174,7 @@ public class SearchFlightsMessageProcessor
                 public Object process(Object object)
                     throws Exception
                 {
-                    return ((TiketConnector) object).searchFlights(_transformedToken, _transformedD, _transformedA, _transformedDate, _transformedAdults, _transformedOutputsf);
+                    return ((TiketConnector) object).searchFlights(_transformedToken, _transformedD, _transformedA, _transformedDate, _transformedAdult, _transformedOutputsf);
                 }
 
             }
